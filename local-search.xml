@@ -11,6 +11,14 @@
     <content type="html"><![CDATA[<h1 id="树莓派5使用串口登录"><a href="#树莓派5使用串口登录" class="headerlink" title="树莓派5使用串口登录"></a>树莓派5使用串口登录</h1><ol><li>树莓派5上有一个专门的调试口，但是我试了很多方法都没办法用这个串口登录</li><li>找到一篇帖子，使用其他串口登录，可行，还不用买那个特别的接口</li><li><a href="https://www.chenxublog.com/2024/05/10/raspberry-pi-5-uart-ssh-no-data.html">https://www.chenxublog.com/2024/05/10/raspberry-pi-5-uart-ssh-no-data.html</a></li></ol><pre><code class="hljs">// 开启串口登录// 修改/boot/firmware/cmdline.txtconsole=ttyAMA0,115200 console=tty1// 修改/boot/firmware/config.txtenable_uart=1dtparam=uart0dtparam=uart0_console// 开启开机日志打印// 修改/boot/firmware/config.txtuart_2ndstage=1// 修改cmdline.txt，去掉quiet```bash</code></pre>]]></content>
     
     
+    <categories>
+      
+      <category>工程链</category>
+      
+      <category>问题记录</category>
+      
+    </categories>
+    
     
   </entry>
   
@@ -23,6 +31,14 @@
     
     <content type="html"><![CDATA[<h1 id="树莓派5配置wifi"><a href="#树莓派5配置wifi" class="headerlink" title="树莓派5配置wifi"></a>树莓派5配置wifi</h1><h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><ol><li>树莓派5烧录镜像时，配置了wifi，但是我想修改wifi</li><li>按照网上教程修改wpa_supplicant.conf文件，还是连接到原先的wifi上</li></ol><h2 id="定位："><a href="#定位：" class="headerlink" title="定位："></a>定位：</h2><ol><li>找到一篇帖子：<a href="https://forums.raspberrypi.com/viewtopic.php?t=371178">https://forums.raspberrypi.com/viewtopic.php?t=371178</a></li><li>意思是RasPiOS Bookworm这个系统已经不再使用wpa_supplicant管理网络了</li><li>查看了下我的系统，是Bookworm，网络管理工具是NetworkManager</li><li>参考这篇帖子，<a href="https://blog.csdn.net/qq_33919450/article/details/134258422">https://blog.csdn.net/qq_33919450/article/details/134258422</a></li></ol><h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><pre><code class="hljs">// 查看系统版本cat /etc/os-release// 查看连接状态nmcli connection show// 扫描可用的wifisudo nmcli dev wifi list// 连接指定wifinmcli dev wifi connect &quot;hello&quot; password &quot;123456&quot; ifname wlan0// 列出已配置网络的优先级nmcli -f NAME,TYPE,AUTOCONNECT-PRIORITY connection show// 设置 myWIFI1 为最高优先级（例如 10）sudo nmcli connection modify &quot;myWIFI1&quot; connection.autoconnect-priority 10// 重启 NetworkManager 服务sudo systemctl restart NetworkManager```bash</code></pre>]]></content>
     
+    
+    <categories>
+      
+      <category>工程链</category>
+      
+      <category>问题记录</category>
+      
+    </categories>
     
     
   </entry>
