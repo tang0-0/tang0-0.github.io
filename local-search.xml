@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Git-patch使用</title>
+    <link href="/posts/921aa84f.html"/>
+    <url>/posts/921aa84f.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="Git-patch使用"><a href="#Git-patch使用" class="headerlink" title="Git-patch使用"></a>Git-patch使用</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>在 Git 中，Patch（补丁） 是一种用于记录和描述代码变更的文本文件。<br>它本质上是文件修改的“差异”（diff），可以将这些差异提取出来，并应用到其他代码仓库或分支中。<br>Patch 的核心作用是保存和传播代码的修改，常用于协作开发、跨仓库同步、提交审查等场景。</p><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul><li><p>跨仓库同步修改</p><p>  当无法直接拉取远程分支时（如权限限制），可以通过生成 Patch 文件将修改应用到其他仓库。</p></li><li><p>协作开发</p><p>  开发者可以将修改生成 Patch 文件，通过邮件或代码审查工具分享给他人，便于讨论和集成。</p></li><li><p>备份和恢复</p><p>  在提交前，可以通过 Patch 文件备份未提交的修改，避免意外丢失。</p></li><li><p>历史回溯</p><p>  通过应用旧的 Patch 文件，可以快速恢复或测试特定版本的修改。</p></li></ul><h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>1.生成单个提交的 Patch</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>使用 git format-patch<br>git format-patch -1 &lt;commit-hash&gt;<br>生成最近一次提交的 Patch 文件（例如 0001-Add-new-feature.patch）。<br><br>使用 git diff：<br>git diff HEAD~1 &gt; my_patch.patch<br><br></code></pre></td></tr></table></figure><p>2.生成多个提交的 Patch 序列</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>生成指定范围内的所有提交：<br>git format-patch &lt;start-commit&gt;..&lt;end-commit&gt;<br><br>例如：git format-patch abc1234..def5678 会生成从 abc1234 到 def5678 的所有提交的 Patch 文件。<br><br>生成最近的 N 个提交：<br>git format-patch -N<br>例如：git format-patch -3 生成最近三个提交的 Patch。<br><br></code></pre></td></tr></table></figure><p>3.生成未提交的修改为 Patch</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>生成工作区的修改：<br>git diff &gt; my_changes.patch<br><br>生成暂存区的修改：<br>git diff --cached &gt; staged.patch<br><br></code></pre></td></tr></table></figure><h2 id="打补丁"><a href="#打补丁" class="headerlink" title="打补丁"></a>打补丁</h2><p>1.使用 git apply</p><p>仅应用修改，不创建提交：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>git apply my_patch.patch<br>如果应用成功，修改会直接出现在工作区。<br>如果失败（如冲突），会生成 .rej 文件记录拒绝的修改。<br><br>检查 Patch 是否可应用：<br>git apply --check my_patch.patch<br><br></code></pre></td></tr></table></figure><p>2.使用 git am</p><p>应用 Patch 并保留提交历史：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>git am my_patch.patch<br>会将 Patch 中的修改应用到代码库，并创建一个新的提交，保留原始提交信息（作者、时间、提交消息）。<br><br>如果应用过程中出现冲突，Git 会提示冲突文件。解决冲突后，使用以下命令继续：<br>git add &lt;conflict-file&gt;<br>git am --<span class="hljs-built_in">continue</span><br><br></code></pre></td></tr></table></figure><p>3.使用 patch 命令</p><p>适用于非 Git 管理的文件或更复杂的路径处理：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">patch -p1 &lt; my_patch.patch<br>-p1 表示剥离路径名的第一层（例如，将 /path/to/file.txt 转换为 to/file.txt）。<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>工程链</category>
+      
+      <category>好用工具</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>树莓派5使用串口登录</title>
     <link href="/posts/f9fcbfe2.html"/>
     <url>/posts/f9fcbfe2.html</url>
