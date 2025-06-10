@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>树莓派OS不支持pip</title>
+    <link href="/posts/6b958691.html"/>
+    <url>/posts/6b958691.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="树莓派OS不支持pip"><a href="#树莓派OS不支持pip" class="headerlink" title="树莓派OS不支持pip"></a>树莓派OS不支持pip</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>Raspberry Pi OS 新版本 Bookworm 不支持使用<code>pip</code>安装软件包，提示和系统包管理工具冲突</p><img src="/posts/6b958691/pip.jpg" class="" title="图片说明"><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用python内置的虚拟环境管理工具<code>venv</code>，创建独立的python运行环境。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 创建虚拟环境</span><br>python -m venv myenv  <span class="hljs-comment"># 创建名为myenv的虚拟环境</span><br><span class="hljs-comment"># --system-site-packages：允许访问全局安装的包（默认隔离）</span><br><br><span class="hljs-comment"># 激活虚拟环境</span><br>source myenv/<span class="hljs-built_in">bin</span>/activate  <span class="hljs-comment"># Linux</span><br>myenv\Scripts\activate    <span class="hljs-comment"># Windows</span><br><br><span class="hljs-comment"># 退出虚拟环境</span><br>deactivate  <span class="hljs-comment"># 所有系统通用</span><br><br><span class="hljs-comment"># 删除虚拟环境</span><br>rm -rf myenv  <span class="hljs-comment"># Linux</span><br><br>pip freeze &gt; requirements.txt  <span class="hljs-comment"># 导出依赖清单</span><br>pip install -r requirements.txt  <span class="hljs-comment"># 根据清单安装</span><br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>工程链</category>
+      
+      <category>问题记录</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Git-patch使用</title>
     <link href="/posts/921aa84f.html"/>
     <url>/posts/921aa84f.html</url>
