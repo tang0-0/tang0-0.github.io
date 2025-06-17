@@ -19,15 +19,15 @@
   <meta name="author" content="tang">
   <meta name="keywords" content="嵌入式开发 MCU RTOS Aiot">
   
-    <meta name="description" content="Micrium OS查询线程总数1. 使用os.h里的全局变量123456789&#x2F;&#x2F; OSTaskDbgListPtr 是一个用于调试目的的任务链表指针,指向内核维护的任务链表&#x2F;&#x2F; 通过遍历这个指针，即可获取所有任务信息OS_EXT OS_TCB *OSTaskDbgListPtr;&#x2F;&#x2F; 记录所有已创建任务的数量OS_EXT OS_OBJ_QTY OSTaskQty;">
+    <meta name="description" content="Coap协议理解(1)应用场景CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。 核心特点1. 报文格式精简使用二进制编码形式，固定报文头仅有4个字节 2. 传输层基于UDP基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输 3. 使用RESTful架构使用和H">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Micrium OS查询线程总数">
-<meta property="og:url" content="https://tang0-0.github.io/posts/9d3d25d4.html">
+<meta property="og:title" content="Coap协议理解(1)">
+<meta property="og:url" content="https://tang0-0.github.io/posts/970739ef.html">
 <meta property="og:site_name" content="tang&#39;s blog">
-<meta property="og:description" content="Micrium OS查询线程总数1. 使用os.h里的全局变量123456789&#x2F;&#x2F; OSTaskDbgListPtr 是一个用于调试目的的任务链表指针,指向内核维护的任务链表&#x2F;&#x2F; 通过遍历这个指针，即可获取所有任务信息OS_EXT OS_TCB *OSTaskDbgListPtr;&#x2F;&#x2F; 记录所有已创建任务的数量OS_EXT OS_OBJ_QTY OSTaskQty;">
+<meta property="og:description" content="Coap协议理解(1)应用场景CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。 核心特点1. 报文格式精简使用二进制编码形式，固定报文头仅有4个字节 2. 传输层基于UDP基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输 3. 使用RESTful架构使用和H">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-12T14:17:24.000Z">
-<meta property="article:modified_time" content="2025-06-12T14:18:21.179Z">
+<meta property="article:published_time" content="2025-06-14T13:57:45.000Z">
+<meta property="article:modified_time" content="2025-06-17T14:24:28.404Z">
 <meta property="article:author" content="tang">
 <meta property="article:tag" content="嵌入式开发 MCU RTOS Aiot">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Micrium OS查询线程总数 - tang&#39;s blog</title>
+  <title>Coap协议理解(1) - tang&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Micrium OS查询线程总数"></span>
+            <span id="subtitle" data-typed-text="Coap协议理解(1)"></span>
           
         </div>
 
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-12 22:17" pubdate>
-          2025年6月12日 晚上
+        <time datetime="2025-06-14 21:57" pubdate>
+          2025年6月14日 晚上
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          326 字
+          1.6k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          3 分钟
+          14 分钟
         
       </span>
     
@@ -261,15 +261,287 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Micrium OS查询线程总数</h1>
+            <h1 id="seo-header">Coap协议理解(1)</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Micrium-OS查询线程总数"><a href="#Micrium-OS查询线程总数" class="headerlink" title="Micrium OS查询线程总数"></a>Micrium OS查询线程总数</h1><h2 id="1-使用os-h里的全局变量"><a href="#1-使用os-h里的全局变量" class="headerlink" title="1. 使用os.h里的全局变量"></a>1. 使用<code>os.h</code>里的全局变量</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-comment">// OSTaskDbgListPtr 是一个用于调试目的的任务链表指针,指向内核维护的任务链表</span><br><span class="hljs-comment">// 通过遍历这个指针，即可获取所有任务信息</span><br>OS_EXT OS_TCB *OSTaskDbgListPtr;<br><br><span class="hljs-comment">// 记录所有已创建任务的数量</span><br>OS_EXT OS_OBJ_QTY OSTaskQty;                                  <br><br><br></code></pre></td></tr></table></figure>
+                <h1 id="Coap协议理解-1"><a href="#Coap协议理解-1" class="headerlink" title="Coap协议理解(1)"></a>Coap协议理解(1)</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。</p>
+<h2 id="核心特点"><a href="#核心特点" class="headerlink" title="核心特点"></a>核心特点</h2><h3 id="1-报文格式精简"><a href="#1-报文格式精简" class="headerlink" title="1. 报文格式精简"></a>1. 报文格式精简</h3><p>使用二进制编码形式，固定报文头仅有4个字节</p>
+<h3 id="2-传输层基于UDP"><a href="#2-传输层基于UDP" class="headerlink" title="2. 传输层基于UDP"></a>2. 传输层基于UDP</h3><p>基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输</p>
+<h3 id="3-使用RESTful架构"><a href="#3-使用RESTful架构" class="headerlink" title="3. 使用RESTful架构"></a>3. 使用RESTful架构</h3><p>使用和HTTP类似的请求-响应模式，支持GET、POST、PUT、DELETE等操作</p>
+<h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-code">+--------+</span>--------<span class="hljs-code">+--------+</span>--------+<br><span class="hljs-section">|Ver| T |TKL|  Code   |   Message ID   |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Token (if any, TKL bytes)        |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Options (if any)                 |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|1 byte: 0xFF (if payload present)   |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Payload (if any)                 |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="2-使用CMSIS-RTOS2的接口，本质也是遍历任务链表"><a href="#2-使用CMSIS-RTOS2的接口，本质也是遍历任务链表" class="headerlink" title="2. 使用CMSIS-RTOS2的接口，本质也是遍历任务链表"></a>2. 使用CMSIS-RTOS2的接口，本质也是遍历任务链表</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><br><span class="hljs-type">uint32_t</span>  <span class="hljs-title function_">osThreadGetCount</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>  <span class="hljs-keyword">if</span> (CORE_InIrqContext() == <span class="hljs-literal">true</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0u</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> (<span class="hljs-type">uint32_t</span>)OSTaskQty;<br>&#125;<br><br><span class="hljs-type">uint32_t</span>  <span class="hljs-title function_">osThreadEnumerate</span><span class="hljs-params">(osThreadId_t   *thread_array,</span><br><span class="hljs-params">                            <span class="hljs-type">uint32_t</span>       array_items)</span><br>&#123;<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> (OS_CFG_DBG_EN == DEF_ENABLED)</span><br>  OS_TCB   *p_tcb;<br>  <span class="hljs-type">uint32_t</span>  items;<br><br>  <span class="hljs-keyword">if</span> (CORE_InIrqContext() == <span class="hljs-literal">true</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0u</span>;<br>  &#125;<br>  items = <span class="hljs-number">0u</span>;<br><br>  CORE_DECLARE_IRQ_STATE;<br>  CORE_ENTER_CRITICAL();<br>  p_tcb = OSTaskDbgListPtr;<br>  <span class="hljs-keyword">while</span> ((p_tcb != (OS_TCB *)<span class="hljs-number">0</span>) &amp;&amp; (items &lt; array_items)) &#123;<br>    *thread_array = p_tcb;<br>    thread_array++;<br>    p_tcb = p_tcb-&gt;DbgNextPtr;<br>    items++;<br>  &#125;<br>  CORE_EXIT_CRITICAL();<br>  <span class="hljs-keyword">return</span> items;<br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>  (<span class="hljs-type">void</span>)thread_array;<br>  (<span class="hljs-type">void</span>)array_items;<br>  RTOS_ASSERT_CRITICAL(DEF_FALSE, RTOS_ERR_NOT_AVAIL, <span class="hljs-number">0u</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0u</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">print_thread_info</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>  <span class="hljs-type">uint32_t</span> maxThreads = osThreadGetCount();<br>  <span class="hljs-keyword">if</span> (maxThreads &gt; <span class="hljs-number">0</span>)<br>  &#123;<br>    osThreadId_t *threadList = <span class="hljs-built_in">malloc</span>(maxThreads * <span class="hljs-keyword">sizeof</span>(osThreadId_t));<br>    <span class="hljs-keyword">if</span> (threadList != <span class="hljs-literal">NULL</span>)<br>    &#123;<br>      <span class="hljs-type">uint32_t</span> actualCount = osThreadEnumerate(threadList, maxThreads);<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\nThread Information:\n&quot;</span>);<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%-20s %3s %-12s %6s %9s\n&quot;</span>,<br>             <span class="hljs-string">&quot;Name&quot;</span>, <span class="hljs-string">&quot;Pri&quot;</span>, <span class="hljs-string">&quot;Status&quot;</span>, <span class="hljs-string">&quot;Stack(*4 bytes)&quot;</span>, <span class="hljs-string">&quot;Max_Used(*4 bytes)&quot;</span>);<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;--------------------------------------------------------\n&quot;</span>);<br><br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">uint32_t</span> i = <span class="hljs-number">0</span>; i &lt; actualCount; i++)<br>      &#123;<br>        OS_TCB *tcb = (OS_TCB *)threadList[i];<br>        <span class="hljs-type">const</span> <span class="hljs-type">char</span> *threadName = osThreadGetName(threadList[i]);<br>        <span class="hljs-type">const</span> <span class="hljs-type">char</span> *state_str = <span class="hljs-string">&quot;Unknown&quot;</span>;<br><br>        <span class="hljs-comment">// 转换任务状态为可读字符串</span><br>        <span class="hljs-keyword">switch</span> (tcb-&gt;TaskState)<br>        &#123;<br>        <span class="hljs-keyword">case</span> OS_TASK_STATE_RDY:<br>          state_str = <span class="hljs-string">&quot;Ready&quot;</span>;<br>          <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> OS_TASK_STATE_DLY:<br>          state_str = <span class="hljs-string">&quot;Delayed&quot;</span>;<br>          <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> OS_TASK_STATE_PEND:<br>          state_str = <span class="hljs-string">&quot;Pending&quot;</span>;<br>          <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> OS_TASK_STATE_SUSPENDED:<br>          state_str = <span class="hljs-string">&quot;Suspended&quot;</span>;<br>          <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> OS_TASK_STATE_PEND_SUSPENDED:<br>          state_str = <span class="hljs-string">&quot;Pend+Susp&quot;</span>;<br>          <span class="hljs-keyword">break</span>;<br>        &#125;<br><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%-25s %3u %-12s %6u %9u\n&quot;</span>,<br>               threadName ? threadName : <span class="hljs-string">&quot;UNKNOWN&quot;</span>,<br>               tcb-&gt;Prio,<br>               state_str,<br>               tcb-&gt;StkSize,<br>               tcb-&gt;StkUsed);<br>      &#125;<br>      <span class="hljs-built_in">free</span>(threadList);<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>整个报文由四部分组成：</p>
+<h3 id="1-Header"><a href="#1-Header" class="headerlink" title="1. Header"></a>1. Header</h3><p><strong>(1) 版本号（Ver）</strong></p>
+<p>2位：表示CoAP协议版本，当前固定值为 01（即版本1.0）。<br>作用：确保兼容性，避免不同版本协议冲突。</p>
+<p><strong>(2) 消息类型（T）</strong></p>
+<p>2位：定义4种消息类型，控制通信的可靠性：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CON</td>
+<td>00</td>
+<td>可确认消息（Confirmable）：需接收方确认（ACK），适用于关键数据传输（如配置更新）。</td>
+</tr>
+<tr>
+<td>NON</td>
+<td>01</td>
+<td>不可确认消息（Non-confirmable）：无需确认，适用于容忍丢包的场景（如传感器数据上报）。</td>
+</tr>
+<tr>
+<td>ACK</td>
+<td>10</td>
+<td>确认消息（Acknowledgement）：响应CON消息的确认。</td>
+</tr>
+<tr>
+<td>RST</td>
+<td>11</td>
+<td>复位消息（Reset）：用于异常终止通信（如服务器无法处理CON消息时返回）。</td>
+</tr>
+</tbody></table>
+<p><strong>(3) 标签长度（TKL）</strong></p>
+<p>4位：指示 Token字段 的长度（0~4字节），取值范围为 0b0000（0字节）到 0b0100（4字节）。<br>Token的作用：用于关联请求与响应，防止重复请求和响应匹配错误。</p>
+<p><strong>(4) 功能码&#x2F;响应码（Code）</strong></p>
+<p>8位：分为 请求码 和 响应码</p>
+<table>
+<thead>
+<tr>
+<th>Code字段</th>
+<th>十进制</th>
+<th>类型</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.00</td>
+<td>0</td>
+<td>空</td>
+<td>Empty</td>
+<td>空消息</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>1</td>
+<td>请求</td>
+<td>GET</td>
+<td>获取资源</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>2</td>
+<td>请求</td>
+<td>POST</td>
+<td>创建或处理资源</td>
+</tr>
+<tr>
+<td>0.03</td>
+<td>3</td>
+<td>请求</td>
+<td>PUT</td>
+<td>更新&#x2F;替换资源</td>
+</tr>
+<tr>
+<td>0.04</td>
+<td>4</td>
+<td>请求</td>
+<td>DELETE</td>
+<td>删除资源</td>
+</tr>
+<tr>
+<td>2.01</td>
+<td>65</td>
+<td>成功响应</td>
+<td>Created</td>
+<td>成功创建资源</td>
+</tr>
+<tr>
+<td>2.02</td>
+<td>66</td>
+<td>成功响应</td>
+<td>Deleted</td>
+<td>成功删除资源</td>
+</tr>
+<tr>
+<td>2.03</td>
+<td>67</td>
+<td>成功响应</td>
+<td>Valid</td>
+<td>响应有效</td>
+</tr>
+<tr>
+<td>2.04</td>
+<td>68</td>
+<td>成功响应</td>
+<td>Changed</td>
+<td>成功修改资源</td>
+</tr>
+<tr>
+<td>2.05</td>
+<td>69</td>
+<td>成功响应</td>
+<td>Content</td>
+<td>成功返回资源内容</td>
+</tr>
+<tr>
+<td>2.31</td>
+<td>95</td>
+<td>成功响应(扩展)</td>
+<td>Continue</td>
+<td>分块传输的中间响应（RFC 7959）</td>
+</tr>
+<tr>
+<td>4.00</td>
+<td>128</td>
+<td>客户端错误</td>
+<td>Bad Request</td>
+<td>请求格式错误</td>
+</tr>
+<tr>
+<td>4.01</td>
+<td>129</td>
+<td>客户端错误</td>
+<td>Unauthorized</td>
+<td>未授权</td>
+</tr>
+<tr>
+<td>4.02</td>
+<td>130</td>
+<td>客户端错误</td>
+<td>Bad Option</td>
+<td>不支持的选项</td>
+</tr>
+<tr>
+<td>4.03</td>
+<td>131</td>
+<td>客户端错误</td>
+<td>Forbidden</td>
+<td>被禁止</td>
+</tr>
+<tr>
+<td>4.04</td>
+<td>132</td>
+<td>客户端错误</td>
+<td>Not Found</td>
+<td>找不到资源</td>
+</tr>
+<tr>
+<td>4.05</td>
+<td>133</td>
+<td>客户端错误</td>
+<td>Method Not Allowed</td>
+<td>方法不允许</td>
+</tr>
+<tr>
+<td>4.06</td>
+<td>134</td>
+<td>客户端错误</td>
+<td>Not Acceptable</td>
+<td>不可接受的内容</td>
+</tr>
+<tr>
+<td>4.08</td>
+<td>136</td>
+<td>客户端错误</td>
+<td>Request Entity Incomplete</td>
+<td>请求实体不完整</td>
+</tr>
+<tr>
+<td>4.09</td>
+<td>137</td>
+<td>客户端错误(扩展)</td>
+<td>Conflict</td>
+<td>资源冲突（RFC 8132）</td>
+</tr>
+<tr>
+<td>4.12</td>
+<td>140</td>
+<td>客户端错误</td>
+<td>Precondition Failed</td>
+<td>前置条件失败</td>
+</tr>
+<tr>
+<td>4.13</td>
+<td>141</td>
+<td>客户端错误</td>
+<td>Request Entity Too Large</td>
+<td>请求体过大</td>
+</tr>
+<tr>
+<td>4.15</td>
+<td>143</td>
+<td>客户端错误</td>
+<td>Unsupported Content-Format</td>
+<td>不支持的内容格式</td>
+</tr>
+<tr>
+<td>5.00</td>
+<td>160</td>
+<td>服务器错误</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td>5.01</td>
+<td>161</td>
+<td>服务器错误</td>
+<td>Not Implemented</td>
+<td>未实现</td>
+</tr>
+<tr>
+<td>5.02</td>
+<td>162</td>
+<td>服务器错误</td>
+<td>Bad Gateway</td>
+<td>网关错误</td>
+</tr>
+<tr>
+<td>5.03</td>
+<td>163</td>
+<td>服务器错误</td>
+<td>Service Unavailable</td>
+<td>服务不可用</td>
+</tr>
+<tr>
+<td>5.04</td>
+<td>164</td>
+<td>服务器错误</td>
+<td>Gateway Timeout</td>
+<td>网关超时</td>
+</tr>
+<tr>
+<td>5.05</td>
+<td>165</td>
+<td>服务器错误</td>
+<td>Proxying Not Supported</td>
+<td>不支持代理</td>
+</tr>
+</tbody></table>
+<p><strong>(5) 报文ID（Message ID）</strong></p>
+<p>16位：唯一标识每个CoAP消息，用于 重传和确认机制，确保消息顺序正确。</p>
+<h3 id="2-Token-可选"><a href="#2-Token-可选" class="headerlink" title="2. Token(可选)"></a>2. Token(可选)</h3><p>长度由TKL指定（0~4字节）：用于匹配请求与响应，避免多线程或并发请求的混淆。</p>
+<h3 id="3-Options-可选"><a href="#3-Options-可选" class="headerlink" title="3. Options(可选)"></a>3. Options(可选)</h3><p>以TLV（类型-长度-值）格式编码，描述如URI、Content-Format等参数。Tag采用紧凑编码（Delta-Value编码）减少开销。<br>格式：<br>Option Delta：表示当前选项编号与前一个选项编号的差值。<br>Option Length：表示选项值的长度。<br>Option Value：实际选项值（如URI路径、内容类型）。</p>
+<h3 id="4-Payload-可选"><a href="#4-Payload-可选" class="headerlink" title="4. Payload(可选)"></a>4. Payload(可选)</h3><p>Payload Marker（负载标记，1字节，0xFF）<br>如果有负载，则用0xFF（1字节）作为标记，标记后面就是负载内容。如果没有负载则省略。<br>Payload（负载，可变长度）<br>实际传输的数据内容。</p>
+<h2 id="通信机制"><a href="#通信机制" class="headerlink" title="通信机制"></a>通信机制</h2><h3 id="1-请求-x2F-响应"><a href="#1-请求-x2F-响应" class="headerlink" title="1. 请求&#x2F;响应"></a>1. 请求&#x2F;响应</h3><p>客户端使用GET\PUT\POST\DELETE等请求方法，在选项中携带URI、Content-Format等参数，Payload中携带数据， 发送请求给服务器。<br>服务器收到请求后，处理请求，返回响应。响应中携带响应码、选项、负载等。</p>
+<p>同步请求&#x2F;响应：客户端发送CON请求，服务器以ACK应答。<br>异步请求&#x2F;响应：如需较长时间处理，可先ACK确认收到请求，后续再发送响应。</p>
+<h3 id="2-重传机制"><a href="#2-重传机制" class="headerlink" title="2. 重传机制"></a>2. 重传机制</h3><p>仅对Confirmable（CON，可确认）消息进行重传。<br>客户端发送一个CON消息，等待ACK确认。<br>如果客户端在超时时间内未收到ACK，会重传CON消息，最多重传N次。<br>这个超时时间的计算采用指数退避算法，初始超时时间为2秒，每次重传时，超时时间加倍。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br>第i次重传等待时间 = ACK_TIMEOUT × (2^(i-1)) × ACK_RANDOM_FACTOR<br><br>ACK<span class="hljs-emphasis">_TIMEOUT：初始超时时间（例如2秒）</span><br><span class="hljs-emphasis">ACK_RANDOM_FACTOR：随机因子,用来防止网络中大量设备在同一时刻同时重传消息，造成网络拥塞或“碰撞”</span><br><span class="hljs-emphasis">通常是一个在一定范围内的浮点数（比如介于1.0和1.5之间），每次重传时由设备随机选择</span><br><span class="hljs-emphasis">MAX_</span>RETRANSMIT：最大重传次数（通常为4次）<br><br></code></pre></td></tr></table></figure>
 
+<h3 id="3-分块传输"><a href="#3-分块传输" class="headerlink" title="3. 分块传输"></a>3. 分块传输</h3><p>CoAP的分块传输机制通过Block1和Block2选项，将大数据分成多个小块顺序传输，可用于固件传输或大文件传输。<br>支持两种方式进行：</p>
+<ol>
+<li>客户端发送POST请求，带上Block1选项，将数据放到Payload中，分块发送给服务器。</li>
+<li>客户端发送GET请求，带上Block2选项，服务器返回数据时，带上Block2选项，将数据放到Payload中，分块返回给客户端。</li>
+</ol>
+<h3 id="4-多播传输"><a href="#4-多播传输" class="headerlink" title="4. 多播传输"></a>4. 多播传输</h3><p>CoAP协议基于UDP，UDP本身支持IP多播。<br>CoAP客户端将请求发送到一个特定的多播IP地址，网络中所有监听该多播组的CoAP服务器都能收到请求。</p>
+<h3 id="5-观察模式"><a href="#5-观察模式" class="headerlink" title="5. 观察模式"></a>5. 观察模式</h3><p>CoAP协议支持观察模式，客户端可以订阅服务器的某个资源，服务器会定期向客户端推送资源变化。</p>
+<h3 id="6-安全机制"><a href="#6-安全机制" class="headerlink" title="6. 安全机制"></a>6. 安全机制</h3><p>CoAP协议支持DTLS安全机制，基于UDP的TLS，用于保护通信安全。</p>
 
                 
               </div>
@@ -288,12 +560,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B7%A5%E7%A8%8B%E9%93%BE/" class="category-chain-item">工程链</a>
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="category-chain-item">技术栈</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%B7%A5%E7%A8%8B%E9%93%BE/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/IoT/" class="category-chain-item">IoT</a>
   
   
 
@@ -315,8 +587,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Micrium OS查询线程总数</div>
-      <div>https://tang0-0.github.io/posts/9d3d25d4.html</div>
+      <div>Coap协议理解(1)</div>
+      <div>https://tang0-0.github.io/posts/970739ef.html</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +600,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月12日</div>
+          <div>2025年6月14日</div>
         </div>
       
       
@@ -360,18 +632,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/970739ef.html" title="Coap协议理解(1)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Coap协议理解(1)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/6b958691.html" title="树莓派OS不支持pip">
-                        <span class="hidden-mobile">树莓派OS不支持pip</span>
+                      <a href="/posts/9d3d25d4.html" title="Micrium OS查询线程总数">
+                        <span class="hidden-mobile">Micrium OS查询线程总数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
