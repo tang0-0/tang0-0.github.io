@@ -19,15 +19,15 @@
   <meta name="author" content="tang">
   <meta name="keywords" content="嵌入式开发 MCU RTOS Aiot">
   
-    <meta name="description" content="Coap协议理解(1)应用场景CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。 核心特点1. 报文格式精简使用二进制编码形式，固定报文头仅有4个字节 2. 传输层基于UDP基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输 3. 使用RESTful架构使用和H">
+    <meta name="description" content="嵌入式技术趋势-2025技术趋势1. 智能化随着人工智能的快速发展，嵌入式系统正逐步集成更多智能化功能。例如，边缘AI（Edge AI）正在成为物联网终端、工业自动化、智能家居等领域的核心驱动力。嵌入式设备不仅可以本地进行数据分析和决策，还能实现自适应和自主学习，推动“设备智能”向“系统智能”演进。 2. 网联化万物互联的时代已然到来，嵌入式设备的网络连接能力成为基础要求。新一代通信协议（如5G、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Coap协议理解(1)">
-<meta property="og:url" content="https://tang0-0.github.io/posts/970739ef.html">
+<meta property="og:title" content="嵌入式技术趋势-2025">
+<meta property="og:url" content="https://tang0-0.github.io/posts/a4a70644.html">
 <meta property="og:site_name" content="tang&#39;s blog">
-<meta property="og:description" content="Coap协议理解(1)应用场景CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。 核心特点1. 报文格式精简使用二进制编码形式，固定报文头仅有4个字节 2. 传输层基于UDP基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输 3. 使用RESTful架构使用和H">
+<meta property="og:description" content="嵌入式技术趋势-2025技术趋势1. 智能化随着人工智能的快速发展，嵌入式系统正逐步集成更多智能化功能。例如，边缘AI（Edge AI）正在成为物联网终端、工业自动化、智能家居等领域的核心驱动力。嵌入式设备不仅可以本地进行数据分析和决策，还能实现自适应和自主学习，推动“设备智能”向“系统智能”演进。 2. 网联化万物互联的时代已然到来，嵌入式设备的网络连接能力成为基础要求。新一代通信协议（如5G、">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-14T13:57:45.000Z">
-<meta property="article:modified_time" content="2025-06-17T14:24:28.404Z">
+<meta property="article:published_time" content="2025-06-21T14:38:56.000Z">
+<meta property="article:modified_time" content="2025-06-21T14:39:23.035Z">
 <meta property="article:author" content="tang">
 <meta property="article:tag" content="嵌入式开发 MCU RTOS Aiot">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Coap协议理解(1) - tang&#39;s blog</title>
+  <title>嵌入式技术趋势-2025 - tang&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Coap协议理解(1)"></span>
+            <span id="subtitle" data-typed-text="嵌入式技术趋势-2025"></span>
           
         </div>
 
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-14 21:57" pubdate>
-          2025年6月14日 晚上
+        <time datetime="2025-06-21 22:38" pubdate>
+          2025年6月21日 晚上
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.1k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          14 分钟
+          9 分钟
         
       </span>
     
@@ -261,287 +261,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Coap协议理解(1)</h1>
+            <h1 id="seo-header">嵌入式技术趋势-2025</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Coap协议理解-1"><a href="#Coap协议理解-1" class="headerlink" title="Coap协议理解(1)"></a>Coap协议理解(1)</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>CoAP（Constrained Application Protocol，受限应用协议）是一种专为资源受限的物联网设备（如低功耗传感器、嵌入式微控制器）设计的轻量级应用层协议。</p>
-<h2 id="核心特点"><a href="#核心特点" class="headerlink" title="核心特点"></a>核心特点</h2><h3 id="1-报文格式精简"><a href="#1-报文格式精简" class="headerlink" title="1. 报文格式精简"></a>1. 报文格式精简</h3><p>使用二进制编码形式，固定报文头仅有4个字节</p>
-<h3 id="2-传输层基于UDP"><a href="#2-传输层基于UDP" class="headerlink" title="2. 传输层基于UDP"></a>2. 传输层基于UDP</h3><p>基于UDP，支持多播；应用层增加响应和重传机制，保证可靠传输</p>
-<h3 id="3-使用RESTful架构"><a href="#3-使用RESTful架构" class="headerlink" title="3. 使用RESTful架构"></a>3. 使用RESTful架构</h3><p>使用和HTTP类似的请求-响应模式，支持GET、POST、PUT、DELETE等操作</p>
-<h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-code">+--------+</span>--------<span class="hljs-code">+--------+</span>--------+<br><span class="hljs-section">|Ver| T |TKL|  Code   |   Message ID   |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Token (if any, TKL bytes)        |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Options (if any)                 |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|1 byte: 0xFF (if payload present)   |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><span class="hljs-section">|   Payload (if any)                 |</span><br><span class="hljs-section">+--------+--------+--------+--------+</span><br><br></code></pre></td></tr></table></figure>
-
-<p>整个报文由四部分组成：</p>
-<h3 id="1-Header"><a href="#1-Header" class="headerlink" title="1. Header"></a>1. Header</h3><p><strong>(1) 版本号（Ver）</strong></p>
-<p>2位：表示CoAP协议版本，当前固定值为 01（即版本1.0）。<br>作用：确保兼容性，避免不同版本协议冲突。</p>
-<p><strong>(2) 消息类型（T）</strong></p>
-<p>2位：定义4种消息类型，控制通信的可靠性：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>编码</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CON</td>
-<td>00</td>
-<td>可确认消息（Confirmable）：需接收方确认（ACK），适用于关键数据传输（如配置更新）。</td>
-</tr>
-<tr>
-<td>NON</td>
-<td>01</td>
-<td>不可确认消息（Non-confirmable）：无需确认，适用于容忍丢包的场景（如传感器数据上报）。</td>
-</tr>
-<tr>
-<td>ACK</td>
-<td>10</td>
-<td>确认消息（Acknowledgement）：响应CON消息的确认。</td>
-</tr>
-<tr>
-<td>RST</td>
-<td>11</td>
-<td>复位消息（Reset）：用于异常终止通信（如服务器无法处理CON消息时返回）。</td>
-</tr>
-</tbody></table>
-<p><strong>(3) 标签长度（TKL）</strong></p>
-<p>4位：指示 Token字段 的长度（0~4字节），取值范围为 0b0000（0字节）到 0b0100（4字节）。<br>Token的作用：用于关联请求与响应，防止重复请求和响应匹配错误。</p>
-<p><strong>(4) 功能码&#x2F;响应码（Code）</strong></p>
-<p>8位：分为 请求码 和 响应码</p>
-<table>
-<thead>
-<tr>
-<th>Code字段</th>
-<th>十进制</th>
-<th>类型</th>
-<th>名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0.00</td>
-<td>0</td>
-<td>空</td>
-<td>Empty</td>
-<td>空消息</td>
-</tr>
-<tr>
-<td>0.01</td>
-<td>1</td>
-<td>请求</td>
-<td>GET</td>
-<td>获取资源</td>
-</tr>
-<tr>
-<td>0.02</td>
-<td>2</td>
-<td>请求</td>
-<td>POST</td>
-<td>创建或处理资源</td>
-</tr>
-<tr>
-<td>0.03</td>
-<td>3</td>
-<td>请求</td>
-<td>PUT</td>
-<td>更新&#x2F;替换资源</td>
-</tr>
-<tr>
-<td>0.04</td>
-<td>4</td>
-<td>请求</td>
-<td>DELETE</td>
-<td>删除资源</td>
-</tr>
-<tr>
-<td>2.01</td>
-<td>65</td>
-<td>成功响应</td>
-<td>Created</td>
-<td>成功创建资源</td>
-</tr>
-<tr>
-<td>2.02</td>
-<td>66</td>
-<td>成功响应</td>
-<td>Deleted</td>
-<td>成功删除资源</td>
-</tr>
-<tr>
-<td>2.03</td>
-<td>67</td>
-<td>成功响应</td>
-<td>Valid</td>
-<td>响应有效</td>
-</tr>
-<tr>
-<td>2.04</td>
-<td>68</td>
-<td>成功响应</td>
-<td>Changed</td>
-<td>成功修改资源</td>
-</tr>
-<tr>
-<td>2.05</td>
-<td>69</td>
-<td>成功响应</td>
-<td>Content</td>
-<td>成功返回资源内容</td>
-</tr>
-<tr>
-<td>2.31</td>
-<td>95</td>
-<td>成功响应(扩展)</td>
-<td>Continue</td>
-<td>分块传输的中间响应（RFC 7959）</td>
-</tr>
-<tr>
-<td>4.00</td>
-<td>128</td>
-<td>客户端错误</td>
-<td>Bad Request</td>
-<td>请求格式错误</td>
-</tr>
-<tr>
-<td>4.01</td>
-<td>129</td>
-<td>客户端错误</td>
-<td>Unauthorized</td>
-<td>未授权</td>
-</tr>
-<tr>
-<td>4.02</td>
-<td>130</td>
-<td>客户端错误</td>
-<td>Bad Option</td>
-<td>不支持的选项</td>
-</tr>
-<tr>
-<td>4.03</td>
-<td>131</td>
-<td>客户端错误</td>
-<td>Forbidden</td>
-<td>被禁止</td>
-</tr>
-<tr>
-<td>4.04</td>
-<td>132</td>
-<td>客户端错误</td>
-<td>Not Found</td>
-<td>找不到资源</td>
-</tr>
-<tr>
-<td>4.05</td>
-<td>133</td>
-<td>客户端错误</td>
-<td>Method Not Allowed</td>
-<td>方法不允许</td>
-</tr>
-<tr>
-<td>4.06</td>
-<td>134</td>
-<td>客户端错误</td>
-<td>Not Acceptable</td>
-<td>不可接受的内容</td>
-</tr>
-<tr>
-<td>4.08</td>
-<td>136</td>
-<td>客户端错误</td>
-<td>Request Entity Incomplete</td>
-<td>请求实体不完整</td>
-</tr>
-<tr>
-<td>4.09</td>
-<td>137</td>
-<td>客户端错误(扩展)</td>
-<td>Conflict</td>
-<td>资源冲突（RFC 8132）</td>
-</tr>
-<tr>
-<td>4.12</td>
-<td>140</td>
-<td>客户端错误</td>
-<td>Precondition Failed</td>
-<td>前置条件失败</td>
-</tr>
-<tr>
-<td>4.13</td>
-<td>141</td>
-<td>客户端错误</td>
-<td>Request Entity Too Large</td>
-<td>请求体过大</td>
-</tr>
-<tr>
-<td>4.15</td>
-<td>143</td>
-<td>客户端错误</td>
-<td>Unsupported Content-Format</td>
-<td>不支持的内容格式</td>
-</tr>
-<tr>
-<td>5.00</td>
-<td>160</td>
-<td>服务器错误</td>
-<td>Internal Server Error</td>
-<td>服务器内部错误</td>
-</tr>
-<tr>
-<td>5.01</td>
-<td>161</td>
-<td>服务器错误</td>
-<td>Not Implemented</td>
-<td>未实现</td>
-</tr>
-<tr>
-<td>5.02</td>
-<td>162</td>
-<td>服务器错误</td>
-<td>Bad Gateway</td>
-<td>网关错误</td>
-</tr>
-<tr>
-<td>5.03</td>
-<td>163</td>
-<td>服务器错误</td>
-<td>Service Unavailable</td>
-<td>服务不可用</td>
-</tr>
-<tr>
-<td>5.04</td>
-<td>164</td>
-<td>服务器错误</td>
-<td>Gateway Timeout</td>
-<td>网关超时</td>
-</tr>
-<tr>
-<td>5.05</td>
-<td>165</td>
-<td>服务器错误</td>
-<td>Proxying Not Supported</td>
-<td>不支持代理</td>
-</tr>
-</tbody></table>
-<p><strong>(5) 报文ID（Message ID）</strong></p>
-<p>16位：唯一标识每个CoAP消息，用于 重传和确认机制，确保消息顺序正确。</p>
-<h3 id="2-Token-可选"><a href="#2-Token-可选" class="headerlink" title="2. Token(可选)"></a>2. Token(可选)</h3><p>长度由TKL指定（0~4字节）：用于匹配请求与响应，避免多线程或并发请求的混淆。</p>
-<h3 id="3-Options-可选"><a href="#3-Options-可选" class="headerlink" title="3. Options(可选)"></a>3. Options(可选)</h3><p>以TLV（类型-长度-值）格式编码，描述如URI、Content-Format等参数。Tag采用紧凑编码（Delta-Value编码）减少开销。<br>格式：<br>Option Delta：表示当前选项编号与前一个选项编号的差值。<br>Option Length：表示选项值的长度。<br>Option Value：实际选项值（如URI路径、内容类型）。</p>
-<h3 id="4-Payload-可选"><a href="#4-Payload-可选" class="headerlink" title="4. Payload(可选)"></a>4. Payload(可选)</h3><p>Payload Marker（负载标记，1字节，0xFF）<br>如果有负载，则用0xFF（1字节）作为标记，标记后面就是负载内容。如果没有负载则省略。<br>Payload（负载，可变长度）<br>实际传输的数据内容。</p>
-<h2 id="通信机制"><a href="#通信机制" class="headerlink" title="通信机制"></a>通信机制</h2><h3 id="1-请求-x2F-响应"><a href="#1-请求-x2F-响应" class="headerlink" title="1. 请求&#x2F;响应"></a>1. 请求&#x2F;响应</h3><p>客户端使用GET\PUT\POST\DELETE等请求方法，在选项中携带URI、Content-Format等参数，Payload中携带数据， 发送请求给服务器。<br>服务器收到请求后，处理请求，返回响应。响应中携带响应码、选项、负载等。</p>
-<p>同步请求&#x2F;响应：客户端发送CON请求，服务器以ACK应答。<br>异步请求&#x2F;响应：如需较长时间处理，可先ACK确认收到请求，后续再发送响应。</p>
-<h3 id="2-重传机制"><a href="#2-重传机制" class="headerlink" title="2. 重传机制"></a>2. 重传机制</h3><p>仅对Confirmable（CON，可确认）消息进行重传。<br>客户端发送一个CON消息，等待ACK确认。<br>如果客户端在超时时间内未收到ACK，会重传CON消息，最多重传N次。<br>这个超时时间的计算采用指数退避算法，初始超时时间为2秒，每次重传时，超时时间加倍。</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br>第i次重传等待时间 = ACK_TIMEOUT × (2^(i-1)) × ACK_RANDOM_FACTOR<br><br>ACK<span class="hljs-emphasis">_TIMEOUT：初始超时时间（例如2秒）</span><br><span class="hljs-emphasis">ACK_RANDOM_FACTOR：随机因子,用来防止网络中大量设备在同一时刻同时重传消息，造成网络拥塞或“碰撞”</span><br><span class="hljs-emphasis">通常是一个在一定范围内的浮点数（比如介于1.0和1.5之间），每次重传时由设备随机选择</span><br><span class="hljs-emphasis">MAX_</span>RETRANSMIT：最大重传次数（通常为4次）<br><br></code></pre></td></tr></table></figure>
-
-<h3 id="3-分块传输"><a href="#3-分块传输" class="headerlink" title="3. 分块传输"></a>3. 分块传输</h3><p>CoAP的分块传输机制通过Block1和Block2选项，将大数据分成多个小块顺序传输，可用于固件传输或大文件传输。<br>支持两种方式进行：</p>
-<ol>
-<li>客户端发送POST请求，带上Block1选项，将数据放到Payload中，分块发送给服务器。</li>
-<li>客户端发送GET请求，带上Block2选项，服务器返回数据时，带上Block2选项，将数据放到Payload中，分块返回给客户端。</li>
-</ol>
-<h3 id="4-多播传输"><a href="#4-多播传输" class="headerlink" title="4. 多播传输"></a>4. 多播传输</h3><p>CoAP协议基于UDP，UDP本身支持IP多播。<br>CoAP客户端将请求发送到一个特定的多播IP地址，网络中所有监听该多播组的CoAP服务器都能收到请求。</p>
-<h3 id="5-观察模式"><a href="#5-观察模式" class="headerlink" title="5. 观察模式"></a>5. 观察模式</h3><p>CoAP协议支持观察模式，客户端可以订阅服务器的某个资源，服务器会定期向客户端推送资源变化。</p>
-<h3 id="6-安全机制"><a href="#6-安全机制" class="headerlink" title="6. 安全机制"></a>6. 安全机制</h3><p>CoAP协议支持DTLS安全机制，基于UDP的TLS，用于保护通信安全。</p>
+                <h1 id="嵌入式技术趋势-2025"><a href="#嵌入式技术趋势-2025" class="headerlink" title="嵌入式技术趋势-2025"></a>嵌入式技术趋势-2025</h1><h2 id="技术趋势"><a href="#技术趋势" class="headerlink" title="技术趋势"></a>技术趋势</h2><h3 id="1-智能化"><a href="#1-智能化" class="headerlink" title="1. 智能化"></a>1. 智能化</h3><p>随着人工智能的快速发展，嵌入式系统正逐步集成更多智能化功能。例如，边缘AI（Edge AI）正在成为物联网终端、工业自动化、智能家居等领域的核心驱动力。嵌入式设备不仅可以本地进行数据分析和决策，还能实现自适应和自主学习，推动“设备智能”向“系统智能”演进。</p>
+<h3 id="2-网联化"><a href="#2-网联化" class="headerlink" title="2. 网联化"></a>2. 网联化</h3><p>万物互联的时代已然到来，嵌入式设备的网络连接能力成为基础要求。新一代通信协议（如5G、Wi-Fi 6、Matter等）被广泛应用，推动嵌入式设备实现云端协同、远程维护和OTA升级。智能网关、边缘计算等技术也在加速嵌入式系统的网络化升级。</p>
+<h3 id="3-安全性"><a href="#3-安全性" class="headerlink" title="3. 安全性"></a>3. 安全性</h3><p>随着嵌入式设备的广泛联网和智能化，安全威胁显著增加。数据加密、安全启动、可信执行环境等安全机制正在成为嵌入式系统设计的标配。合规与认证（如GDPR、ISO 26262等）也对嵌入式安全提出更高要求，无论是硬件还是软件层面，安全性都成为核心竞争力。</p>
+<h3 id="4-低功耗"><a href="#4-低功耗" class="headerlink" title="4. 低功耗"></a>4. 低功耗</h3><p>绿色节能和移动应用需求推动低功耗技术持续创新。超低功耗MCU、动态电源管理、多级休眠、能效算法等技术不断涌现。低功耗设计不仅延长了电池寿命，也为无源设备、可穿戴设备、环境监测等新兴场景提供了可能。</p>
+<h2 id="值得关注的新技术"><a href="#值得关注的新技术" class="headerlink" title="值得关注的新技术"></a>值得关注的新技术</h2><h3 id="1-TinyML"><a href="#1-TinyML" class="headerlink" title="1. TinyML"></a>1. TinyML</h3><p>TinyML指在资源受限的嵌入式设备上运行机器学习模型。通过优化模型结构、量化权重和高效硬件支持，TinyML使AI算法能够在微控制器（如Cortex-M系列）等极小型芯片上实现实时推理，广泛应用于语音识别、图像分类、异常检测等场景。</p>
+<h3 id="2-RISC-V"><a href="#2-RISC-V" class="headerlink" title="2. RISC-V"></a>2. RISC-V</h3><p>RISC-V作为开源指令集架构，凭借其高度可扩展性和灵活性，受到嵌入式领域的广泛关注。RISC-V生态持续壮大，相关芯片、开发板和工具链日益丰富。它不仅降低了芯片设计门槛，还为专用加速器和安全机制的定制化开辟了新路径。</p>
+<h3 id="3-多核异构"><a href="#3-多核异构" class="headerlink" title="3. 多核异构"></a>3. 多核异构</h3><p>多核异构架构（Heterogeneous Multi-core）通过集成不同类型的CPU、DSP、NPU、FPGA等处理单元，实现任务的最优分配与加速。该技术极大提升了嵌入式系统的计算效率和能效比，在自动驾驶、智能视觉、边缘AI等场景表现突出。</p>
+<h3 id="4-TrustZone"><a href="#4-TrustZone" class="headerlink" title="4. TrustZone"></a>4. TrustZone</h3><p>ARM TrustZone为嵌入式设备提供硬件隔离的安全执行环境。它通过将系统划分为安全域和非安全域，实现安全启动、密钥管理和受信任应用的独立运行。TrustZone已成为物联网、支付终端等对安全性要求高的应用的首选方案。</p>
+<h3 id="5-Zephyr"><a href="#5-Zephyr" class="headerlink" title="5. Zephyr"></a>5. Zephyr</h3><p>Zephyr是一款轻量级、模块化的开源实时操作系统（RTOS），专为资源受限的嵌入式设备设计。它支持多种架构（包括ARM、RISC-V等），具有高可移植性和丰富的中间件组件，适用于物联网、可穿戴、传感器网络等多样化应用。</p>
+<h3 id="6-Rust"><a href="#6-Rust" class="headerlink" title="6. Rust"></a>6. Rust</h3><p>Rust语言以“安全、并发、性能”为核心，逐步进入嵌入式开发领域。Rust的零成本抽象与内存安全特性，有效减少了嵌入式系统中的常见漏洞（如空指针、缓冲区溢出），正在成为新一代高可靠嵌入式软件开发的重要选择。</p>
+<h3 id="7-能量收集"><a href="#7-能量收集" class="headerlink" title="7. 能量收集"></a>7. 能量收集</h3><p>能量收集（Energy Harvesting）技术通过太阳能、热能、振动、射频等环境能量为嵌入式设备供电，极大延长了设备的工作寿命。该技术使无源、超低功耗、长寿命的嵌入式应用成为可能，广泛应用于无线传感器网络、可穿戴设备、远程监测等场景，推动了真正意义上的“自供能”物联网终端发展。</p>
 
                 
               </div>
@@ -549,34 +284,6 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="category-chain-item">技术栈</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/IoT/" class="category-chain-item">IoT</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -587,8 +294,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Coap协议理解(1)</div>
-      <div>https://tang0-0.github.io/posts/970739ef.html</div>
+      <div>嵌入式技术趋势-2025</div>
+      <div>https://tang0-0.github.io/posts/a4a70644.html</div>
     </div>
     <div class="license-meta">
       
@@ -600,7 +307,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月14日</div>
+          <div>2025年6月21日</div>
         </div>
       
       
@@ -632,18 +339,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/a4a70644.html" title="嵌入式技术趋势-2025">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">嵌入式技术趋势-2025</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/9d3d25d4.html" title="Micrium OS查询线程总数">
-                        <span class="hidden-mobile">Micrium OS查询线程总数</span>
+                      <a href="/posts/970739ef.html" title="Coap协议理解(1)">
+                        <span class="hidden-mobile">Coap协议理解(1)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
