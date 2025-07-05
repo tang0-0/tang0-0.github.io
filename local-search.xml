@@ -4,11 +4,32 @@
   
   
   <entry>
+    <title>MPL多播协议理解</title>
+    <link href="/posts/56e6edd6.html"/>
+    <url>/posts/56e6edd6.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="MPL多播协议理解"><a href="#MPL多播协议理解" class="headerlink" title="MPL多播协议理解"></a>MPL多播协议理解</h1><blockquote><p>协议文档：<a href="https://rfc2cn.com/rfc7731.html">https://rfc2cn.com/rfc7731.html</a></p></blockquote><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。<br>它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场景。</p><h2 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h2><h3 id="两种转发策略"><a href="#两种转发策略" class="headerlink" title="两种转发策略"></a>两种转发策略</h3><p>1.主动转发</p><p>节点收到广播消息就转发，无需相邻节点的的消息</p><p>2.被动转发</p><p>每个节点会周期发送消息，告知附近节点自己的已经收到的消息，附近节点比对自己的缓存，转发邻居没收到的消息</p><h3 id="Trickle算法"><a href="#Trickle算法" class="headerlink" title="Trickle算法"></a>Trickle算法</h3><p>Trickle 算法是一种用于无线自组网（如 Wi-SUN、Thread 等）中高效传播和维护信息（如路由、配置或多播消息）的定时器算法。<br>它的核心思想是通过动态调整消息广播的频率，既能快速传播新信息，又能减少冗余通信，节省网络资源。</p><p>Trickle 算法的参数通常包括：</p><ul><li>imin_s：最小间隔时间（秒），即消息最短的广播周期。</li><li>imax_s：最大间隔时间（秒），即消息最长的广播周期。</li><li>k：冗余常数，表示在一个间隔内允许的最大冗余消息数（如果收到的相同消息数超过 k，则不再转发）。</li></ul><p>执行过程<br>1.初始化：将定时器周期设置为imin_s<br>2.随机发送时间：在[0,imin_s]内，随机一个时间点t<br>3.冗余检测: 在[0,t]内，节点会统计收到的相同消息的次数。<br>如果收到的相同消息数达到或超过冗余常数 k，则本周期不再广播该消息,否则就发送消息<br>4.定时器更新：如果没有检测到新消息，每经过一个周期，定时器周期会指数级增长（通常是翻倍），直到达到最大值 imax_s<br>5.动态调整：一旦节点检测到新消息或信息变化，定时器区间会立即重置为最小值 imin_s，以便快速将新消息传播到整个网络。</p><h2 id="主动转发"><a href="#主动转发" class="headerlink" title="主动转发"></a>主动转发</h2><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>Trickle参数：imin_s， imax_s， k<br>seed_lifetime_s：MPL 种子集合条目的生命周期（秒），即一条多播消息的唯一标识（seed）在节点中保留的时间。<br>trickle_expirations：trickle 定时器到期次数，表示在丢弃 seed 集合条目前，trickle 定时器需要到期的次数。<br>seed_id_type：MPL 种子 ID 类型。0 表示 seed-id 被省略，使用 IPv6 源地址作为种子 ID；3 表示 seed-id 是 128 位的 ULA&#x2F;GUA 地址。</p><h3 id="转发策略"><a href="#转发策略" class="headerlink" title="转发策略"></a>转发策略</h3><p>1.查重<br>节点收到一条多播消息后，会检查该消息的“种子ID + 序列号”是否已经处理过。如果已经处理过，则丢弃该消息，不再转发；否则进入转发流程<br>2.启动 Trickle 定时器<br>3.周期内没有收到附近节点的重复消息达到k，则发送该消息，达到K则不再发送<br>4.周期递增<br>每经过一个周期，如果没有新消息，Trickle 定时器的周期会递增（通常翻倍），直到最大值 imax_s。<br>5.转发次数限制<br>每条消息的转发周期数由 trickle_expirations和seed_lifetime_s决定，超过转发次数限制或者种子生命周期到期，则不再转发该消息。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术栈</category>
+      
+      <category>IoT</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Coap分块传输(2)</title>
     <link href="/posts/a23fc180.html"/>
     <url>/posts/a23fc180.html</url>
     
-    <content type="html"><![CDATA[<h1 id="Coap分块传输-2"><a href="#Coap分块传输-2" class="headerlink" title="Coap分块传输(2)"></a>Coap分块传输(2)</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>CoAP（Constrained Application Protocol）的分块传输机制（Block-wise Transfer）是解决大文件传输问题的核心功能。<br>可以用来实现固件更新和大文件传输。</p><h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>1.上传模式：客户端使用PUT&#x2F;POST方法，分块上传数据到服务器<br>2.下载模式：客户端使用GET方法，请求服务器数据，服务器在响应中返回分块数据</p><h2 id="分块传输选项"><a href="#分块传输选项" class="headerlink" title="分块传输选项"></a>分块传输选项</h2><p>CoAP 分块传输选项（Block Option）用于在请求和响应中携带分块信息，包括块大小、块数量、块偏移等。<br>通过这些选项，客户端和服务器可以协商分块传输的参数，实现高效的数据传输。</p><h3 id="Block选项"><a href="#Block选项" class="headerlink" title="Block选项"></a>Block选项</h3><p>Block1：用于请求（Request）中的分块上传（如PUT&#x2F;POST），表示客户端正在发送的数据块。<br>Block2：用于响应（Response）中的分块下载（如GET），表示服务器正在返回的数据块。</p><p>每个Block选项包含三个关键字段：</p><ul><li>SZX（Size Extension）：2位，表示块大小的指数（范围0-6），计算公式为<br><code>块大小 = 16 * 2^SZX（即16~1024字节）</code>。</li><li>M（More Flag）：1位，表示是否还有后续块（1&#x3D;有，0&#x3D;无）。</li><li>NUM（Number）：块编号（从0开始递增），表示当前块在整个数据中的位置。</li></ul><h3 id="Size选项"><a href="#Size选项" class="headerlink" title="Size选项"></a>Size选项</h3><p>Size1：客户端在请求中声明的总数据大小（仅用于上传场景）。<br>Size2：服务器在响应中声明的总数据大小（仅用于下载场景）。</p><h2 id="传输流程"><a href="#传输流程" class="headerlink" title="传输流程"></a>传输流程</h2><h3 id="下载场景（GET请求）"><a href="#下载场景（GET请求）" class="headerlink" title="下载场景（GET请求）"></a>下载场景（GET请求）</h3><ul><li><p>客户端发起请求：<br>在GET请求中携带 Block2 选项，设置 NUM&#x3D;0、M&#x3D;0、SZX&#x3D;期望块大小，表示希望以指定块大小下载数据。<br>示例：Block2: NUM&#x3D;0, M&#x3D;0, SZX&#x3D;4（块大小&#x3D;128字节）。</p></li><li><p>服务器响应：<br>返回第一个数据块，携带 Block2 选项，设置 NUM&#x3D;0、M&#x3D;1（表示还有更多块）、SZX&#x3D;实际块大小。<br>可选携带 Size2 选项，告知客户端总数据大小。<br>示例：Block2: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4，Size2: 1024。</p></li><li><p>客户端继续请求：<br>根据服务器返回的 Block2 中的 NUM 值递增（NUM+1），发送新的GET请求，携带更新的 Block2 选项。<br>示例：Block2: NUM&#x3D;1, M&#x3D;0, SZX&#x3D;4。</p></li><li><p>服务器继续响应：<br>返回后续块，直到 M&#x3D;0 表示传输完成。</p></li></ul><h3 id="上传场景（PUT-x2F-POST请求）"><a href="#上传场景（PUT-x2F-POST请求）" class="headerlink" title="上传场景（PUT&#x2F;POST请求）"></a>上传场景（PUT&#x2F;POST请求）</h3><ul><li><p>客户端发送第一个块：<br>在请求中携带 Block1 选项，设置 NUM&#x3D;0、M&#x3D;1、SZX&#x3D;块大小，并附带第一个数据块。<br>可选携带 Size1 选项，声明总数据大小。<br>示例：Block1: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4，Size1: 1024。</p></li><li><p>服务器响应：<br>返回确认（ACK）或中间状态码（如2.04 Changed），并携带 Block1 选项，设置 M&#x3D;1（表示需要更多块）。<br>示例：Block1: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4。</p></li><li><p>客户端发送后续块：<br>根据 Block1 中的 NUM 值递增（NUM+1），发送下一个块，并更新 M 标志（最后一个块设为 M&#x3D;0）。</p></li><li><p>服务器最终响应：<br>当所有块接收完成后，返回最终响应（如2.04 Changed），并设置 M&#x3D;0。</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Coap分块传输-2"><a href="#Coap分块传输-2" class="headerlink" title="Coap分块传输(2)"></a>Coap分块传输(2)</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>CoAP（Constrained Application Protocol）的分块传输机制（Block-wise Transfer）是解决大文件传输问题的核心功能。<br>可以用来实现固件更新和大文件传输。</p><h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>1.上传模式：客户端使用PUT&#x2F;POST方法，分块上传数据到服务器<br>2.下载模式：客户端使用GET方法，请求服务器数据，服务器在响应中返回分块数据</p><h2 id="分块传输选项"><a href="#分块传输选项" class="headerlink" title="分块传输选项"></a>分块传输选项</h2><p>CoAP 分块传输选项（Block Option）用于在请求和响应中携带分块信息，包括块大小、块数量、块偏移等。<br>通过这些选项，客户端和服务器可以协商分块传输的参数，实现高效的数据传输。</p><h3 id="Block选项"><a href="#Block选项" class="headerlink" title="Block选项"></a>Block选项</h3><p>Block1：用于请求（Request）中的分块上传（如PUT&#x2F;POST），表示客户端正在发送的数据块。<br>Block2：用于响应（Response）中的分块下载（如GET），表示服务器正在返回的数据块。</p><p>每个Block选项包含三个关键字段：</p><ul><li>SZX（Size Extension）：2位，表示块大小的指数（范围0-6），计算公式为<br><code>块大小 = 16 * 2^SZX（即16~1024字节）</code></li><li>M（More Flag）：1位，表示是否还有后续块（1&#x3D;有，0&#x3D;无）。</li><li>NUM（Number）：块编号（从0开始递增），表示当前块在整个数据中的位置。</li></ul><h3 id="Size选项"><a href="#Size选项" class="headerlink" title="Size选项"></a>Size选项</h3><p>Size1：客户端在请求中声明的总数据大小（仅用于上传场景）。<br>Size2：服务器在响应中声明的总数据大小（仅用于下载场景）。</p><h2 id="传输流程"><a href="#传输流程" class="headerlink" title="传输流程"></a>传输流程</h2><h3 id="下载场景（GET请求）"><a href="#下载场景（GET请求）" class="headerlink" title="下载场景（GET请求）"></a>下载场景（GET请求）</h3><ul><li><p>客户端发起请求：<br>在GET请求中携带 Block2 选项，设置 NUM&#x3D;0、M&#x3D;0、SZX&#x3D;期望块大小，表示希望以指定块大小下载数据。<br>示例：Block2: NUM&#x3D;0, M&#x3D;0, SZX&#x3D;4（块大小&#x3D;128字节）。</p></li><li><p>服务器响应：<br>返回第一个数据块，携带 Block2 选项，设置 NUM&#x3D;0、M&#x3D;1（表示还有更多块）、SZX&#x3D;实际块大小。<br>可选携带 Size2 选项，告知客户端总数据大小。<br>示例：Block2: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4，Size2: 1024。</p></li><li><p>客户端继续请求：<br>根据服务器返回的 Block2 中的 NUM 值递增（NUM+1），发送新的GET请求，携带更新的 Block2 选项。<br>示例：Block2: NUM&#x3D;1, M&#x3D;0, SZX&#x3D;4。</p></li><li><p>服务器继续响应：<br>返回后续块，直到 M&#x3D;0 表示传输完成。</p></li></ul><h3 id="上传场景（PUT-x2F-POST请求）"><a href="#上传场景（PUT-x2F-POST请求）" class="headerlink" title="上传场景（PUT&#x2F;POST请求）"></a>上传场景（PUT&#x2F;POST请求）</h3><ul><li><p>客户端发送第一个块：<br>在请求中携带 Block1 选项，设置 NUM&#x3D;0、M&#x3D;1、SZX&#x3D;块大小，并附带第一个数据块。<br>可选携带 Size1 选项，声明总数据大小。<br>示例：Block1: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4，Size1: 1024。</p></li><li><p>服务器响应：<br>返回确认（ACK）或中间状态码（如2.04 Changed），并携带 Block1 选项，设置 M&#x3D;1（表示需要更多块）。<br>示例：Block1: NUM&#x3D;0, M&#x3D;1, SZX&#x3D;4。</p></li><li><p>客户端发送后续块：<br>根据 Block1 中的 NUM 值递增（NUM+1），发送下一个块，并更新 M 标志（最后一个块设为 M&#x3D;0）。</p></li><li><p>服务器最终响应：<br>当所有块接收完成后，返回最终响应（如2.04 Changed），并设置 M&#x3D;0。</p></li></ul>]]></content>
     
     
     <categories>
@@ -78,7 +99,7 @@
       
       <category>工程链</category>
       
-      <category>问题记录</category>
+      <category>调试技巧</category>
       
     </categories>
     
@@ -99,7 +120,7 @@
       
       <category>工程链</category>
       
-      <category>问题记录</category>
+      <category>调试技巧</category>
       
     </categories>
     
@@ -141,7 +162,7 @@
       
       <category>工程链</category>
       
-      <category>问题记录</category>
+      <category>调试技巧</category>
       
     </categories>
     
@@ -162,7 +183,7 @@
       
       <category>工程链</category>
       
-      <category>问题记录</category>
+      <category>调试技巧</category>
       
     </categories>
     

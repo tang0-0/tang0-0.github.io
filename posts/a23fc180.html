@@ -27,7 +27,7 @@
 <meta property="og:description" content="Coap分块传输(2)应用场景CoAP（Constrained Application Protocol）的分块传输机制（Block-wise Transfer）是解决大文件传输问题的核心功能。可以用来实现固件更新和大文件传输。 两种模式1.上传模式：客户端使用PUT&#x2F;POST方法，分块上传数据到服务器2.下载模式：客户端使用GET方法，请求服务器数据，服务器在响应中返回分块数据 分块传">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-26T13:39:52.000Z">
-<meta property="article:modified_time" content="2025-06-26T14:08:16.065Z">
+<meta property="article:modified_time" content="2025-06-26T14:09:01.347Z">
 <meta property="article:author" content="tang">
 <meta property="article:tag" content="嵌入式开发 MCU RTOS Aiot">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +272,7 @@
 <h3 id="Block选项"><a href="#Block选项" class="headerlink" title="Block选项"></a>Block选项</h3><p>Block1：用于请求（Request）中的分块上传（如PUT&#x2F;POST），表示客户端正在发送的数据块。<br>Block2：用于响应（Response）中的分块下载（如GET），表示服务器正在返回的数据块。</p>
 <p>每个Block选项包含三个关键字段：</p>
 <ul>
-<li>SZX（Size Extension）：2位，表示块大小的指数（范围0-6），计算公式为<br><code>块大小 = 16 * 2^SZX（即16~1024字节）</code>。</li>
+<li>SZX（Size Extension）：2位，表示块大小的指数（范围0-6），计算公式为<br><code>块大小 = 16 * 2^SZX（即16~1024字节）</code></li>
 <li>M（More Flag）：1位，表示是否还有后续块（1&#x3D;有，0&#x3D;无）。</li>
 <li>NUM（Number）：块编号（从0开始递增），表示当前块在整个数据中的位置。</li>
 </ul>
@@ -386,6 +386,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/56e6edd6.html" title="MPL多播协议理解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MPL多播协议理解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

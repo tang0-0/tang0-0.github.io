@@ -19,15 +19,15 @@
   <meta name="author" content="tang">
   <meta name="keywords" content="嵌入式开发 MCU RTOS Aiot">
   
-    <meta name="description" content="树莓派5配置wifi现象： 树莓派5烧录镜像时，配置了wifi，但是我想修改wifi 按照网上教程修改wpa_supplicant.conf文件，还是连接到原先的wifi上  定位： 找到一篇帖子：https:&#x2F;&#x2F;forums.raspberrypi.com&#x2F;viewtopic.php?t&#x3D;371178 意思是RasPiOS Bookworm这个系统已经不再使用wpa_supplicant管理网络">
+    <meta name="description" content="MPL多播协议理解 协议文档：https:&#x2F;&#x2F;rfc2cn.com&#x2F;rfc7731.html  应用场景MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派5配置WIFI">
-<meta property="og:url" content="https://tang0-0.github.io/posts/4be71e.html">
+<meta property="og:title" content="MPL多播协议理解">
+<meta property="og:url" content="https://tang0-0.github.io/posts/56e6edd6.html">
 <meta property="og:site_name" content="tang&#39;s blog">
-<meta property="og:description" content="树莓派5配置wifi现象： 树莓派5烧录镜像时，配置了wifi，但是我想修改wifi 按照网上教程修改wpa_supplicant.conf文件，还是连接到原先的wifi上  定位： 找到一篇帖子：https:&#x2F;&#x2F;forums.raspberrypi.com&#x2F;viewtopic.php?t&#x3D;371178 意思是RasPiOS Bookworm这个系统已经不再使用wpa_supplicant管理网络">
+<meta property="og:description" content="MPL多播协议理解 协议文档：https:&#x2F;&#x2F;rfc2cn.com&#x2F;rfc7731.html  应用场景MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-05T14:20:21.000Z">
-<meta property="article:modified_time" content="2025-06-29T13:12:10.076Z">
+<meta property="article:published_time" content="2025-07-05T08:27:29.000Z">
+<meta property="article:modified_time" content="2025-07-05T10:30:10.114Z">
 <meta property="article:author" content="tang">
 <meta property="article:tag" content="嵌入式开发 MCU RTOS Aiot">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>树莓派5配置WIFI - tang&#39;s blog</title>
+  <title>MPL多播协议理解 - tang&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="树莓派5配置WIFI"></span>
+            <span id="subtitle" data-typed-text="MPL多播协议理解"></span>
           
         </div>
 
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-05 22:20" pubdate>
-          2025年5月5日 晚上
+        <time datetime="2025-07-05 16:27" pubdate>
+          2025年7月5日 下午
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          194 字
+          854 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          2 分钟
+          8 分钟
         
       </span>
     
@@ -261,44 +261,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">树莓派5配置WIFI</h1>
+            <h1 id="seo-header">MPL多播协议理解</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="树莓派5配置wifi"><a href="#树莓派5配置wifi" class="headerlink" title="树莓派5配置wifi"></a>树莓派5配置wifi</h1><h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><ol>
-<li>树莓派5烧录镜像时，配置了wifi，但是我想修改wifi</li>
-<li>按照网上教程修改wpa_supplicant.conf文件，还是连接到原先的wifi上</li>
-</ol>
-<h2 id="定位："><a href="#定位：" class="headerlink" title="定位："></a>定位：</h2><ol>
-<li>找到一篇帖子：<a target="_blank" rel="noopener" href="https://forums.raspberrypi.com/viewtopic.php?t=371178">https://forums.raspberrypi.com/viewtopic.php?t=371178</a></li>
-<li>意思是RasPiOS Bookworm这个系统已经不再使用wpa_supplicant管理网络了</li>
-<li>查看了下我的系统，是Bookworm，网络管理工具是NetworkManager</li>
-<li>参考这篇帖子，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33919450/article/details/134258422">https://blog.csdn.net/qq_33919450/article/details/134258422</a></li>
-</ol>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><pre><code class="hljs">// 查看系统版本
-cat /etc/os-release
-
-// 查看连接状态
-nmcli connection show
-
-// 扫描可用的wifi
-sudo nmcli dev wifi list
-
-// 连接指定wifi
-nmcli dev wifi connect &quot;hello&quot; password &quot;123456&quot; ifname wlan0
-
-// 列出已配置网络的优先级
-nmcli -f NAME,TYPE,AUTOCONNECT-PRIORITY connection show
-
-// 设置 myWIFI1 为最高优先级（例如 10）
-sudo nmcli connection modify &quot;myWIFI1&quot; connection.autoconnect-priority 10
-
-// 重启 NetworkManager 服务
-sudo systemctl restart NetworkManager
-
-```bash
-</code></pre>
+                <h1 id="MPL多播协议理解"><a href="#MPL多播协议理解" class="headerlink" title="MPL多播协议理解"></a>MPL多播协议理解</h1><blockquote>
+<p>协议文档：<a target="_blank" rel="noopener" href="https://rfc2cn.com/rfc7731.html">https://rfc2cn.com/rfc7731.html</a></p>
+</blockquote>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。<br>它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场景。</p>
+<h2 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h2><h3 id="两种转发策略"><a href="#两种转发策略" class="headerlink" title="两种转发策略"></a>两种转发策略</h3><p>1.主动转发</p>
+<p>节点收到广播消息就转发，无需相邻节点的的消息</p>
+<p>2.被动转发</p>
+<p>每个节点会周期发送消息，告知附近节点自己的已经收到的消息，附近节点比对自己的缓存，转发邻居没收到的消息</p>
+<h3 id="Trickle算法"><a href="#Trickle算法" class="headerlink" title="Trickle算法"></a>Trickle算法</h3><p>Trickle 算法是一种用于无线自组网（如 Wi-SUN、Thread 等）中高效传播和维护信息（如路由、配置或多播消息）的定时器算法。<br>它的核心思想是通过动态调整消息广播的频率，既能快速传播新信息，又能减少冗余通信，节省网络资源。</p>
+<p>Trickle 算法的参数通常包括：</p>
+<ul>
+<li>imin_s：最小间隔时间（秒），即消息最短的广播周期。</li>
+<li>imax_s：最大间隔时间（秒），即消息最长的广播周期。</li>
+<li>k：冗余常数，表示在一个间隔内允许的最大冗余消息数（如果收到的相同消息数超过 k，则不再转发）。</li>
+</ul>
+<p>执行过程<br>1.初始化：将定时器周期设置为imin_s<br>2.随机发送时间：在[0,imin_s]内，随机一个时间点t<br>3.冗余检测: 在[0,t]内，节点会统计收到的相同消息的次数。<br>如果收到的相同消息数达到或超过冗余常数 k，则本周期不再广播该消息,否则就发送消息<br>4.定时器更新：如果没有检测到新消息，每经过一个周期，定时器周期会指数级增长（通常是翻倍），直到达到最大值 imax_s<br>5.动态调整：一旦节点检测到新消息或信息变化，定时器区间会立即重置为最小值 imin_s，以便快速将新消息传播到整个网络。</p>
+<h2 id="主动转发"><a href="#主动转发" class="headerlink" title="主动转发"></a>主动转发</h2><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>Trickle参数：imin_s， imax_s， k<br>seed_lifetime_s：MPL 种子集合条目的生命周期（秒），即一条多播消息的唯一标识（seed）在节点中保留的时间。<br>trickle_expirations：trickle 定时器到期次数，表示在丢弃 seed 集合条目前，trickle 定时器需要到期的次数。<br>seed_id_type：MPL 种子 ID 类型。0 表示 seed-id 被省略，使用 IPv6 源地址作为种子 ID；3 表示 seed-id 是 128 位的 ULA&#x2F;GUA 地址。</p>
+<h3 id="转发策略"><a href="#转发策略" class="headerlink" title="转发策略"></a>转发策略</h3><p>1.查重<br>节点收到一条多播消息后，会检查该消息的“种子ID + 序列号”是否已经处理过。如果已经处理过，则丢弃该消息，不再转发；否则进入转发流程<br>2.启动 Trickle 定时器<br>3.周期内没有收到附近节点的重复消息达到k，则发送该消息，达到K则不再发送<br>4.周期递增<br>每经过一个周期，如果没有新消息，Trickle 定时器的周期会递增（通常翻倍），直到最大值 imax_s。<br>5.转发次数限制<br>每条消息的转发周期数由 trickle_expirations和seed_lifetime_s决定，超过转发次数限制或者种子生命周期到期，则不再转发该消息。</p>
 
                 
               </div>
@@ -317,12 +302,12 @@ sudo systemctl restart NetworkManager
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B7%A5%E7%A8%8B%E9%93%BE/" class="category-chain-item">工程链</a>
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="category-chain-item">技术栈</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%B7%A5%E7%A8%8B%E9%93%BE/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" class="category-chain-item">调试技巧</a>
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/IoT/" class="category-chain-item">IoT</a>
   
   
 
@@ -344,8 +329,8 @@ sudo systemctl restart NetworkManager
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>树莓派5配置WIFI</div>
-      <div>https://tang0-0.github.io/posts/4be71e.html</div>
+      <div>MPL多播协议理解</div>
+      <div>https://tang0-0.github.io/posts/56e6edd6.html</div>
     </div>
     <div class="license-meta">
       
@@ -357,7 +342,7 @@ sudo systemctl restart NetworkManager
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年5月5日</div>
+          <div>2025年7月5日</div>
         </div>
       
       
@@ -389,18 +374,12 @@ sudo systemctl restart NetworkManager
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/f9fcbfe2.html" title="树莓派5使用串口登录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树莓派5使用串口登录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/eaa58a8b.html" title="电子工程师核心技能树">
-                        <span class="hidden-mobile">电子工程师核心技能树</span>
+                      <a href="/posts/a23fc180.html" title="Coap分块传输(2)">
+                        <span class="hidden-mobile">Coap分块传输(2)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
