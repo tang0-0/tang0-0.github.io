@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>C-编译构建(1)-编译过程</title>
+    <link href="/posts/58ada7b2.html"/>
+    <url>/posts/58ada7b2.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-编译构建-1-编译过程"><a href="#C-编译构建-1-编译过程" class="headerlink" title="C-编译构建(1)-编译过程"></a>C-编译构建(1)-编译过程</h1><blockquote><p>参考资料<br><a href="https://www.cnblogs.com/fisherss/p/13905395.html">https://www.cnblogs.com/fisherss/p/13905395.html</a><br><a href="https://mp.weixin.qq.com/s/Ie99bZu3fAkS2ndVOflOAA">https://mp.weixin.qq.com/s/Ie99bZu3fAkS2ndVOflOAA</a><br>《嵌入式C语言自我修养》</p></blockquote><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ol><li>编译过程 </li><li>链接脚本 </li><li>编译工具 </li><li>构建工具</li></ol><h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><ol><li>预处理：处理头文件包含、宏定义替换、条件编译、编译控制，生成.i文件</li><li>编译：生成汇编代码，*.s文件</li><li>汇编：生成机器码，*.o文件</li><li>链接：链接库文件和目标文件，生成可执行文件</li></ol><p><img src="/posts/58ada7b2/1.png" alt="alt text"></p><h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>主要是对源代码做文本处理</p><ol><li>头文件展开</li><li>宏替换</li><li>条件编译，#if,#ifdef,#ifndef</li><li>编译控制，#pragma,#error,#warning</li><li>删除注释</li><li>添加行号和文件名标识</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -E main.c -o main.i<br></code></pre></td></tr></table></figure><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p><img src="/posts/58ada7b2/2.jpg" alt="alt text"></p><p>主要是对代码做语法分析和代码优化，生成汇编代码</p><ol><li>词法分析，将语句分解为有意义的最小单元：关键字、标识符、字面量、运算符等</li><li>语法分析，生成语法树</li><li>语义分析，检查语法树是否有语义错误   </li><li>中间代码生成，将语法树转换为中间代码</li><li>优化中间代码，常量折叠,死代码消除,循环优化,指令优化,公共子表达式消除</li><li>指令转换，将中间代码翻译为目标架构的汇编指令</li><li>寄存器分配，决定变量使用哪些寄存器或内存</li><li>指令优化，针对目标机器的硬件特性进行优化,如寄存器分配、指令调度</li><li>生成汇编代码</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -S main.i -o main.s<br></code></pre></td></tr></table></figure><blockquote><p>什么是中间代码?<br>中间代码是介于源语言和机器语言之间的一种代码，是语法树的更清晰的表示形式。<br>是与硬件平台无关的表示：形式，方便汇编器根据不同平台生成不同的机器码。<br>中间代码通常有三种形式三地址码、P-代码。</p><p>代码优化<br>为了平衡程序性能、编译时间和代码大小，编译器可以选择执行不同的优化策略。<br>-O0：不进行任何优化。<br>-O1：进行简单的优化，删除未使用的代码（死代码消除），简化表达式（常量折叠），优化简单的循环结构。<br>-O2：进行更全面的优化，包含O1的优化和更复杂的优化，如指令调度、寄存器分配、函数内联、循环展开。<br>-O3：激进优化，包含O2的优化和更激进的优化，如自动向量化（SIMD）、更激进的循环展开、函数内联。<br>-Os：以减小代码体积为优化目标，包含O2的优化，但不会做增加代码体积的优化，比如循环展开和内联。<br>-Og：在 -O1 基础上保留调试信息，优化程度接近 -O1，但禁用干扰调试的优化（如内联）。<br>-Ofast：开启 O3 级别优化，同时启用 -ffast-math，追求极致性能。</p></blockquote><h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><p><img src="/posts/58ada7b2/3.jpg" alt="alt text"></p><p>主要是将汇编代码转换为对应平台的机器码，同时生成符号表和重定位表</p><ol><li>词法分析，将语句分解为有意义的最小单元：助记符、寄存器名、立即数等</li><li>语法分析，检查指令格式、寄存器是否正确</li><li>生成符号表，解析代码中的变量名和标签，并为其分配内存地址</li><li>生成重定位表，解析代码中的外部符号，生成指向信息</li><li>指令解析，将指令和数据转换成二进制码</li><li>生成目标文件，将机器码、符号表、重定位表等整合为一个目标文件</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>gcc -c main.s -o main.o<br><br>gcc -c main.c -o main.o<br><br></code></pre></td></tr></table></figure><blockquote><p>什么是符号表和重定位表？<br>符号表记录着目标文件中每个符号的偏移量。<br>在C语言中，符号是指变量、函数。<br>重定位表记录程序中需要链接器调整的符号的位置。<br>链接器根据重定位表对符号地址进行修正和调整。</p></blockquote><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="/posts/58ada7b2/4.jpg" alt="alt text"></p><p>将多个目标文件和库文件合并为一个可执行文件或者库文件</p><ol><li>符号解析，解析所有目标文件的符号，进行强弱符号检查</li><li>分段合并，根据链接脚本，合并所有目标文件的代码段、数据段，分配地址</li><li>重定位，修正所有目标文件中符号的地址</li><li>输出可执行文件</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc main.o -o main<br></code></pre></td></tr></table></figure><blockquote><p>强弱符号<br>强符号：初始化的全局变量和所有函数<br>弱符号：未初始化的全局变量、显示声明__attribute__((weak))的函数和全局变量<br>检查规则：<br>1.两个同名强符号会报错<br>2.强弱共存时，强符号覆盖弱符号<br>3.两个弱符号，选择占用空间大的那个</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术栈</category>
+      
+      <category>Lang</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MPL多播协议理解</title>
     <link href="/posts/56e6edd6.html"/>
     <url>/posts/56e6edd6.html</url>

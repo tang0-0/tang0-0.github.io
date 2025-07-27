@@ -19,24 +19,29 @@
   <meta name="author" content="tang">
   <meta name="keywords" content="嵌入式开发 MCU RTOS Aiot">
   
-    <meta name="description" content="MPL多播协议理解 协议文档：https:&#x2F;&#x2F;rfc2cn.com&#x2F;rfc7731.html  应用场景MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场">
+    <meta name="description" content="C-编译构建(1)-编译过程 参考资料https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fisherss&#x2F;p&#x2F;13905395.htmlhttps:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;Ie99bZu3fAkS2ndVOflOAA《嵌入式C语言自我修养》  核心概念 编译过程  链接脚本  编译工具  构建工具  编译过程 预处理：处理头文件包含、宏定义替换、条件编译、编译控制，生成.i文件 编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MPL多播协议理解">
-<meta property="og:url" content="https://tang0-0.github.io/posts/56e6edd6.html">
+<meta property="og:title" content="C-编译构建(1)-编译过程">
+<meta property="og:url" content="https://tang0-0.github.io/posts/58ada7b2.html">
 <meta property="og:site_name" content="tang&#39;s blog">
-<meta property="og:description" content="MPL多播协议理解 协议文档：https:&#x2F;&#x2F;rfc2cn.com&#x2F;rfc7731.html  应用场景MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场">
+<meta property="og:description" content="C-编译构建(1)-编译过程 参考资料https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fisherss&#x2F;p&#x2F;13905395.htmlhttps:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;Ie99bZu3fAkS2ndVOflOAA《嵌入式C语言自我修养》  核心概念 编译过程  链接脚本  编译工具  构建工具  编译过程 预处理：处理头文件包含、宏定义替换、条件编译、编译控制，生成.i文件 编">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-07-05T08:27:29.000Z">
-<meta property="article:modified_time" content="2025-07-05T10:30:10.114Z">
+<meta property="og:image" content="https://tang0-0.github.io/posts/58ada7b2/1.png">
+<meta property="og:image" content="https://tang0-0.github.io/posts/58ada7b2/2.jpg">
+<meta property="og:image" content="https://tang0-0.github.io/posts/58ada7b2/3.jpg">
+<meta property="og:image" content="https://tang0-0.github.io/posts/58ada7b2/4.jpg">
+<meta property="article:published_time" content="2025-07-09T14:01:36.000Z">
+<meta property="article:modified_time" content="2025-07-27T10:08:52.149Z">
 <meta property="article:author" content="tang">
 <meta property="article:tag" content="嵌入式开发 MCU RTOS Aiot">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tang0-0.github.io/posts/58ada7b2/1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>MPL多播协议理解 - tang&#39;s blog</title>
+  <title>C-编译构建(1)-编译过程 - tang&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="MPL多播协议理解"></span>
+            <span id="subtitle" data-typed-text="C-编译构建(1)-编译过程"></span>
           
         </div>
 
@@ -201,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-07-05 16:27" pubdate>
-          2025年7月5日 下午
+        <time datetime="2025-07-09 22:01" pubdate>
+          2025年7月9日 晚上
         </time>
       </span>
     
@@ -213,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          854 字
+          1.2k 字
         
       </span>
     
@@ -224,7 +229,7 @@
         
         
         
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -261,29 +266,85 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MPL多播协议理解</h1>
+            <h1 id="seo-header">C-编译构建(1)-编译过程</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="MPL多播协议理解"><a href="#MPL多播协议理解" class="headerlink" title="MPL多播协议理解"></a>MPL多播协议理解</h1><blockquote>
-<p>协议文档：<a target="_blank" rel="noopener" href="https://rfc2cn.com/rfc7731.html">https://rfc2cn.com/rfc7731.html</a></p>
+                <h1 id="C-编译构建-1-编译过程"><a href="#C-编译构建-1-编译过程" class="headerlink" title="C-编译构建(1)-编译过程"></a>C-编译构建(1)-编译过程</h1><blockquote>
+<p>参考资料<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fisherss/p/13905395.html">https://www.cnblogs.com/fisherss/p/13905395.html</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Ie99bZu3fAkS2ndVOflOAA">https://mp.weixin.qq.com/s/Ie99bZu3fAkS2ndVOflOAA</a><br>《嵌入式C语言自我修养》</p>
 </blockquote>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>MPL（Multicast Protocol for Low-Power and Lossy Networks）是一种专为 低功耗有损网络（LLNs） 设计的 IPv6 多播转发协议。<br>它旨在解决资源受限（如内存、计算能力和能源）网络中的多播传输问题，尤其适用于物联网（IoT）、无线传感器网络等场景。</p>
-<h2 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h2><h3 id="两种转发策略"><a href="#两种转发策略" class="headerlink" title="两种转发策略"></a>两种转发策略</h3><p>1.主动转发</p>
-<p>节点收到广播消息就转发，无需相邻节点的的消息</p>
-<p>2.被动转发</p>
-<p>每个节点会周期发送消息，告知附近节点自己的已经收到的消息，附近节点比对自己的缓存，转发邻居没收到的消息</p>
-<h3 id="Trickle算法"><a href="#Trickle算法" class="headerlink" title="Trickle算法"></a>Trickle算法</h3><p>Trickle 算法是一种用于无线自组网（如 Wi-SUN、Thread 等）中高效传播和维护信息（如路由、配置或多播消息）的定时器算法。<br>它的核心思想是通过动态调整消息广播的频率，既能快速传播新信息，又能减少冗余通信，节省网络资源。</p>
-<p>Trickle 算法的参数通常包括：</p>
-<ul>
-<li>imin_s：最小间隔时间（秒），即消息最短的广播周期。</li>
-<li>imax_s：最大间隔时间（秒），即消息最长的广播周期。</li>
-<li>k：冗余常数，表示在一个间隔内允许的最大冗余消息数（如果收到的相同消息数超过 k，则不再转发）。</li>
-</ul>
-<p>执行过程<br>1.初始化：将定时器周期设置为imin_s<br>2.随机发送时间：在[0,imin_s]内，随机一个时间点t<br>3.冗余检测: 在[0,t]内，节点会统计收到的相同消息的次数。<br>如果收到的相同消息数达到或超过冗余常数 k，则本周期不再广播该消息,否则就发送消息<br>4.定时器更新：如果没有检测到新消息，每经过一个周期，定时器周期会指数级增长（通常是翻倍），直到达到最大值 imax_s<br>5.动态调整：一旦节点检测到新消息或信息变化，定时器区间会立即重置为最小值 imin_s，以便快速将新消息传播到整个网络。</p>
-<h2 id="主动转发"><a href="#主动转发" class="headerlink" title="主动转发"></a>主动转发</h2><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>Trickle参数：imin_s， imax_s， k<br>seed_lifetime_s：MPL 种子集合条目的生命周期（秒），即一条多播消息的唯一标识（seed）在节点中保留的时间。<br>trickle_expirations：trickle 定时器到期次数，表示在丢弃 seed 集合条目前，trickle 定时器需要到期的次数。<br>seed_id_type：MPL 种子 ID 类型。0 表示 seed-id 被省略，使用 IPv6 源地址作为种子 ID；3 表示 seed-id 是 128 位的 ULA&#x2F;GUA 地址。</p>
-<h3 id="转发策略"><a href="#转发策略" class="headerlink" title="转发策略"></a>转发策略</h3><p>1.查重<br>节点收到一条多播消息后，会检查该消息的“种子ID + 序列号”是否已经处理过。如果已经处理过，则丢弃该消息，不再转发；否则进入转发流程<br>2.启动 Trickle 定时器<br>3.周期内没有收到附近节点的重复消息达到k，则发送该消息，达到K则不再发送<br>4.周期递增<br>每经过一个周期，如果没有新消息，Trickle 定时器的周期会递增（通常翻倍），直到最大值 imax_s。<br>5.转发次数限制<br>每条消息的转发周期数由 trickle_expirations和seed_lifetime_s决定，超过转发次数限制或者种子生命周期到期，则不再转发该消息。</p>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ol>
+<li>编译过程 </li>
+<li>链接脚本 </li>
+<li>编译工具 </li>
+<li>构建工具</li>
+</ol>
+<h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><ol>
+<li>预处理：处理头文件包含、宏定义替换、条件编译、编译控制，生成.i文件</li>
+<li>编译：生成汇编代码，*.s文件</li>
+<li>汇编：生成机器码，*.o文件</li>
+<li>链接：链接库文件和目标文件，生成可执行文件</li>
+</ol>
+<p><img src="/posts/58ada7b2/1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>主要是对源代码做文本处理</p>
+<ol>
+<li>头文件展开</li>
+<li>宏替换</li>
+<li>条件编译，#if,#ifdef,#ifndef</li>
+<li>编译控制，#pragma,#error,#warning</li>
+<li>删除注释</li>
+<li>添加行号和文件名标识</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -E main.c -o main.i<br></code></pre></td></tr></table></figure>
+
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p><img src="/posts/58ada7b2/2.jpg" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>主要是对代码做语法分析和代码优化，生成汇编代码</p>
+<ol>
+<li>词法分析，将语句分解为有意义的最小单元：关键字、标识符、字面量、运算符等</li>
+<li>语法分析，生成语法树</li>
+<li>语义分析，检查语法树是否有语义错误   </li>
+<li>中间代码生成，将语法树转换为中间代码</li>
+<li>优化中间代码，常量折叠,死代码消除,循环优化,指令优化,公共子表达式消除</li>
+<li>指令转换，将中间代码翻译为目标架构的汇编指令</li>
+<li>寄存器分配，决定变量使用哪些寄存器或内存</li>
+<li>指令优化，针对目标机器的硬件特性进行优化,如寄存器分配、指令调度</li>
+<li>生成汇编代码</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -S main.i -o main.s<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是中间代码?<br>中间代码是介于源语言和机器语言之间的一种代码，是语法树的更清晰的表示形式。<br>是与硬件平台无关的表示：形式，方便汇编器根据不同平台生成不同的机器码。<br>中间代码通常有三种形式三地址码、P-代码。</p>
+<p>代码优化<br>为了平衡程序性能、编译时间和代码大小，编译器可以选择执行不同的优化策略。<br>-O0：不进行任何优化。<br>-O1：进行简单的优化，删除未使用的代码（死代码消除），简化表达式（常量折叠），优化简单的循环结构。<br>-O2：进行更全面的优化，包含O1的优化和更复杂的优化，如指令调度、寄存器分配、函数内联、循环展开。<br>-O3：激进优化，包含O2的优化和更激进的优化，如自动向量化（SIMD）、更激进的循环展开、函数内联。<br>-Os：以减小代码体积为优化目标，包含O2的优化，但不会做增加代码体积的优化，比如循环展开和内联。<br>-Og：在 -O1 基础上保留调试信息，优化程度接近 -O1，但禁用干扰调试的优化（如内联）。<br>-Ofast：开启 O3 级别优化，同时启用 -ffast-math，追求极致性能。</p>
+</blockquote>
+<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><p><img src="/posts/58ada7b2/3.jpg" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>主要是将汇编代码转换为对应平台的机器码，同时生成符号表和重定位表</p>
+<ol>
+<li>词法分析，将语句分解为有意义的最小单元：助记符、寄存器名、立即数等</li>
+<li>语法分析，检查指令格式、寄存器是否正确</li>
+<li>生成符号表，解析代码中的变量名和标签，并为其分配内存地址</li>
+<li>生成重定位表，解析代码中的外部符号，生成指向信息</li>
+<li>指令解析，将指令和数据转换成二进制码</li>
+<li>生成目标文件，将机器码、符号表、重定位表等整合为一个目标文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>gcc -c main.s -o main.o<br><br>gcc -c main.c -o main.o<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是符号表和重定位表？<br>符号表记录着目标文件中每个符号的偏移量。<br>在C语言中，符号是指变量、函数。<br>重定位表记录程序中需要链接器调整的符号的位置。<br>链接器根据重定位表对符号地址进行修正和调整。</p>
+</blockquote>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="/posts/58ada7b2/4.jpg" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>将多个目标文件和库文件合并为一个可执行文件或者库文件</p>
+<ol>
+<li>符号解析，解析所有目标文件的符号，进行强弱符号检查</li>
+<li>分段合并，根据链接脚本，合并所有目标文件的代码段、数据段，分配地址</li>
+<li>重定位，修正所有目标文件中符号的地址</li>
+<li>输出可执行文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc main.o -o main<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>强弱符号<br>强符号：初始化的全局变量和所有函数<br>弱符号：未初始化的全局变量、显示声明__attribute__((weak))的函数和全局变量<br>检查规则：<br>1.两个同名强符号会报错<br>2.强弱共存时，强符号覆盖弱符号<br>3.两个弱符号，选择占用空间大的那个</p>
+</blockquote>
 
                 
               </div>
@@ -307,7 +368,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/IoT/" class="category-chain-item">IoT</a>
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Lang/" class="category-chain-item">Lang</a>
   
   
 
@@ -329,8 +390,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MPL多播协议理解</div>
-      <div>https://tang0-0.github.io/posts/56e6edd6.html</div>
+      <div>C-编译构建(1)-编译过程</div>
+      <div>https://tang0-0.github.io/posts/58ada7b2.html</div>
     </div>
     <div class="license-meta">
       
@@ -342,7 +403,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年7月5日</div>
+          <div>2025年7月9日</div>
         </div>
       
       
@@ -374,18 +435,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/58ada7b2.html" title="C-编译构建(1)-编译过程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C-编译构建(1)-编译过程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/a23fc180.html" title="Coap分块传输(2)">
-                        <span class="hidden-mobile">Coap分块传输(2)</span>
+                      <a href="/posts/56e6edd6.html" title="MPL多播协议理解">
+                        <span class="hidden-mobile">MPL多播协议理解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
