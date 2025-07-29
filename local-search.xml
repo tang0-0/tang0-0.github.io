@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>核心概念(1)-临界区</title>
+    <link href="/posts/1497fb64.html"/>
+    <url>/posts/1497fb64.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="RTOS核心概念-1-临界区"><a href="#RTOS核心概念-1-临界区" class="headerlink" title="RTOS核心概念(1)-临界区"></a>RTOS核心概念(1)-临界区</h1><h2 id="1-什么是临界资源"><a href="#1-什么是临界资源" class="headerlink" title="1. 什么是临界资源"></a>1. 什么是临界资源</h2><p>会被多个线程、中断服务函数同时访问的资源</p><ol><li>全局变量</li><li>共享的数据结构</li><li>硬件寄存器</li></ol><h2 id="2-什么是临界区"><a href="#2-什么是临界区" class="headerlink" title="2. 什么是临界区"></a>2. 什么是临界区</h2><p>临界区指一段代码，这段代码访问了临界资源</p><h2 id="3-如何进行临界区保护"><a href="#3-如何进行临界区保护" class="headerlink" title="3. 如何进行临界区保护"></a>3. 如何进行临界区保护</h2><blockquote><p><a href="https://mp.weixin.qq.com/s/3YGtqU491_iph3vkEwKKxA">https://mp.weixin.qq.com/s/3YGtqU491_iph3vkEwKKxA</a><br><a href="https://zhuanlan.zhihu.com/p/1911794422468818636">https://zhuanlan.zhihu.com/p/1911794422468818636</a></p></blockquote><p>临界区保护：让线程和中断对临界资源的访问有序，不能出现A访问到一半被B打断的情况</p><p>对于裸机系统，任务被打断只有一种情况，那就是中断。</p><p>中断被打断，也只有一种情况，更高优先级的中断。</p><p>这种情况下，保护方式就是关全局中断。这时候那些中断会挂起，然后执行临界区代码，再打开中断响应。</p><p>ARM Cortex-M内核芯片中，设置这三个内核寄存器可以用来关闭全局中断。</p><ol><li>PRIMASK: 设置为1时，屏蔽所有可屏蔽中断（保留RESET、NMI和HardFault）</li><li>FAULTMASK: 保留RESET、NMI，其余中断全部屏蔽</li><li>BASEPRI: 可以屏蔽任意优先级 interrupts，（不能屏蔽RESET、NMI和HardFault）</li></ol><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// CMSIS-Core API</span><br><br><span class="hljs-type">void</span> __enable_irq(); <span class="hljs-comment">// 清除 PRIMASK</span><br><span class="hljs-type">void</span> __disable_irq(); <span class="hljs-comment">// 设置 PRIMASK</span><br><span class="hljs-type">void</span> __set_PRIMASK(<span class="hljs-type">uint32_t</span> priMask); <span class="hljs-comment">// 设置 PRIMASK 为特定值</span><br><span class="hljs-type">uint32_t</span> __get_PRIMASK(<span class="hljs-type">void</span>); <span class="hljs-comment">// 读取 PRIMASK 的数值</span><br><br><span class="hljs-type">void</span> __enable_fault_irq(<span class="hljs-type">void</span>);  <span class="hljs-comment">// 清除 FAULTMASK</span><br><span class="hljs-type">void</span> __disable_fault_irq(<span class="hljs-type">void</span>); <span class="hljs-comment">// 设置 FAULTMASK 以禁用中断</span><br><span class="hljs-type">void</span> __set_FAULTMASK(<span class="hljs-type">uint32_t</span> faultMask);<br><span class="hljs-type">uint32_t</span> __get_FAULTMASK(<span class="hljs-type">void</span>);<br><br>__set_BASEPRI(<span class="hljs-number">0x40</span>);  <span class="hljs-comment">// 屏蔽优先级号 &gt;= 0x40 的中断</span><br>__set_BASEPRI(<span class="hljs-number">0x00</span>);<br><span class="hljs-type">uint32_t</span> __get_BASEPRI(<span class="hljs-type">void</span>);<br><br></code></pre></td></tr></table></figure><p>对于RTOS系统，会出现三种代码被打断的情况：</p><ol><li>线程被线程打断</li><li>线程被中断打断</li><li>中断被更高优先级的中断打断</li></ol><p>有三种临界区保护方法：</p><ol><li>关中断</li><li>关闭线程调度</li><li>使用互斥锁</li></ol><p>中断和中断、中断和线程之间的保护，需要使用关中断的方式</p><p>线程和线程之间的保护，使用上面三种都可以</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术栈</category>
+      
+      <category>RTOS</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>C-编译构建(1)-编译过程</title>
     <link href="/posts/58ada7b2.html"/>
     <url>/posts/58ada7b2.html</url>
